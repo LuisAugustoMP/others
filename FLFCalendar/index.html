@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Importe o calendário acadêmico da Faculdade Luciano Feijão e gere automaticamente um arquivo .ICS com as datas de provas para seu calendário." />
+  <meta name="author" content="Luis Augusto M. Pontes" />
+  <meta name="theme-color" content="#304296" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#304296" />
+  <title>Gerador de Calendário de Provas — Faculdade Luciano Feijão</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <!-- App Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Background Pattern -->
+  <div class="bg-pattern" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header class="header" role="banner">
+    <div class="header-content">
+      <img src="assets/flflogo.png" alt="Logo Faculdade Luciano Feijão" class="header-logo" />
+      <span class="header-title">Calendário de Provas</span>
+      <span class="header-badge" aria-label="Período atual">2026.1</span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main" role="main">
+    <div class="container">
+
+      <!-- Steps Indicator -->
+      <nav class="steps-indicator" aria-label="Progresso das etapas">
+        <div class="step-dot active" id="step-dot-1" aria-label="Etapa 1: Upload" role="tab" aria-selected="true">1</div>
+        <div class="step-line" id="step-line-1"></div>
+        <div class="step-dot" id="step-dot-2" aria-label="Etapa 2: Análise" role="tab" aria-selected="false">2</div>
+        <div class="step-line" id="step-line-2"></div>
+        <div class="step-dot" id="step-dot-3" aria-label="Etapa 3: Seleção" role="tab" aria-selected="false">3</div>
+        <div class="step-line" id="step-line-3"></div>
+        <div class="step-dot" id="step-dot-4" aria-label="Etapa 4: Exportar" role="tab" aria-selected="false">4</div>
+      </nav>
+
+      <!-- ==================== STEP 1: Upload ==================== -->
+      <section class="step active" id="step-upload" aria-label="Enviar PDF">
+        <div class="upload-hero">
+          <img src="assets/flflogo.png" alt="Logo Faculdade Luciano Feijão" class="upload-hero-logo" />
+          <h1>Gerador de Calendário de Provas</h1>
+          <p>Importe o calendário acadêmico da Faculdade Luciano Feijão e gere automaticamente seus eventos de prova.</p>
+        </div>
+
+        <div class="upload-zone" id="upload-zone" role="button" tabindex="0" aria-label="Área para enviar arquivo PDF. Arraste e solte ou clique para selecionar.">
+          <div class="upload-zone-icon">
+            <i class="fa-solid fa-file-arrow-up" aria-hidden="true"></i>
+          </div>
+          <div class="upload-zone-text">Arraste o PDF aqui</div>
+          <div class="upload-zone-hint">ou <span>clique para selecionar um PDF</span></div>
+          <input type="file" id="upload-input" class="upload-input" accept="application/pdf" aria-label="Selecionar arquivo PDF" />
+        </div>
+
+        
+        <div class="api-key-container" style="margin-top: 2rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.05); border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.1);">
+          <h3 style="margin-top: 0; font-size: 1.1rem; margin-bottom: 1rem;"><i class="fa-solid fa-robot"></i> OpenRouter AI Agent</h3>
+          <p style="font-size: 0.9rem; margin-bottom: 1rem; opacity: 0.8;">Para utilizar a IA na leitura do calendário, insira sua chave da API do OpenRouter. A chave é salva apenas no seu navegador.</p>
+          <div style="display: flex; gap: 0.5rem;">
+            <input type="password" id="openrouter-api-key" placeholder="sk-or-v1-..." style="flex: 1; padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.2); color: white; font-family: monospace;" />
+            <button id="btn-save-key" class="btn-primary" style="padding: 0 1.5rem;">Salvar</button>
+          </div>
+        </div>
+
+        <div class="upload-features" aria-label="Recursos disponíveis">
+          <div class="upload-feature">
+            <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+            <span>Disciplinas</span>
+          </div>
+          <div class="upload-feature">
+            <i class="fa-solid fa-clock" aria-hidden="true"></i>
+            <span>Horários</span>
+          </div>
+          <div class="upload-feature">
+            <i class="fa-solid fa-clipboard-check" aria-hidden="true"></i>
+            <span>AV1 e AV2</span>
+          </div>
+          <div class="upload-feature">
+            <i class="fa-solid fa-file-export" aria-hidden="true"></i>
+            <span>Arquivo ICS</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== STEP 2: Loading ==================== -->
+      <section class="step" id="step-loading" aria-label="Analisando PDF" aria-live="polite">
+        <div class="loading-container">
+          <div class="loading-spinner" aria-hidden="true"></div>
+          <div class="loading-text" id="loading-text">Analisando documento...</div>
+          <div class="loading-subtext" id="loading-subtext">Isso pode levar alguns segundos</div>
+          <div class="loading-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            <div class="loading-progress-fill" id="loading-progress"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== STEP 3: Selection ==================== -->
+      <section class="step" id="step-selection" aria-label="Selecionar disciplinas">
+        <div class="card">
+          <div class="selection-header">
+            <h2>
+              <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+              Selecione suas disciplinas
+            </h2>
+            <div class="selection-count" id="selection-count" aria-live="polite">
+              <i class="fa-solid fa-check" aria-hidden="true"></i>
+              <span id="selection-count-text">0 selecionadas</span>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="selection-tabs" role="tablist" aria-label="Modo de seleção">
+            <button class="selection-tab active" id="tab-semester" role="tab" aria-selected="true" aria-controls="panel-semester" data-tab="semester">
+              <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+              Por Semestre
+            </button>
+            <button class="selection-tab" id="tab-discipline" role="tab" aria-selected="false" aria-controls="panel-discipline" data-tab="discipline">
+              <i class="fa-solid fa-list" aria-hidden="true"></i>
+              Individual
+            </button>
+          </div>
+
+          <!-- Panel: By Semester -->
+          <div class="selection-panel active" id="panel-semester" role="tabpanel" aria-labelledby="tab-semester">
+            <div class="semester-grid" id="semester-grid">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Panel: Individual -->
+          <div class="selection-panel" id="panel-discipline" role="tabpanel" aria-labelledby="tab-discipline">
+            <div class="search-container">
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+              <input type="text" class="search-input" id="search-input" placeholder="Pesquisar disciplina..." aria-label="Pesquisar disciplina" />
+            </div>
+            <div class="discipline-list" id="discipline-list" role="listbox" aria-label="Lista de disciplinas">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Selected chips -->
+          <div class="selected-chips" id="selected-chips" aria-label="Disciplinas selecionadas">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Action buttons -->
+          <div class="btn-row">
+            <button class="btn-secondary" id="btn-back-upload" aria-label="Voltar para o upload">
+              <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+              Voltar
+            </button>
+            <button class="btn-primary" id="btn-continue" disabled aria-label="Continuar para visualização">
+              Gerar ICS com IA
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== STEP 4: Preview & Export ==================== -->
+      <section class="step" id="step-preview" aria-label="Pré-visualização e exportação">
+        <div class="card">
+          <div class="preview-header">
+            <h2>
+              <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+              Suas Provas
+            </h2>
+            <div class="preview-stats">
+              <div class="preview-stat disciplines" id="stat-disciplines">
+                <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+                <span id="stat-disciplines-text">0 disciplinas</span>
+              </div>
+              <div class="preview-stat exams" id="stat-exams">
+                <i class="fa-solid fa-clipboard-check" aria-hidden="true"></i>
+                <span id="stat-exams-text">0 provas</span>
+              </div>
+            </div>
+          </div>
+
+          <img src="assets/flflogo.png" alt="" class="preview-logo" aria-hidden="true" />
+
+          <div class="exam-cards" id="exam-cards">
+            <!-- Dynamically populated -->
+          </div>
+
+          <button class="btn-export" id="btn-export" aria-label="Gerar arquivo ICS">
+            <i class="fa-solid fa-file-export" aria-hidden="true"></i>
+            Gerar Arquivo ICS
+          </button>
+
+          <div class="export-info" aria-label="Informação de compatibilidade">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            <span>Compatível com Apple Calendar, Google Calendar, Outlook e mais</span>
+          </div>
+
+          <div class="compat-badges">
+            <div class="compat-badge"><i class="fa-brands fa-apple" aria-hidden="true"></i> Apple</div>
+            <div class="compat-badge"><i class="fa-brands fa-google" aria-hidden="true"></i> Google</div>
+            <div class="compat-badge"><i class="fa-brands fa-microsoft" aria-hidden="true"></i> Outlook</div>
+            <div class="compat-badge"><i class="fa-solid fa-calendar" aria-hidden="true"></i> Fantastical</div>
+            <div class="compat-badge"><i class="fa-brands fa-android" aria-hidden="true"></i> Android</div>
+          </div>
+
+          <div class="btn-row" style="margin-top: 24px;">
+            <button class="btn-secondary" id="btn-back-selection" aria-label="Voltar para a seleção">
+              <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+              Voltar
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== STEP 5: Success ==================== -->
+      <section class="step" id="step-success" aria-label="Download concluído">
+        <div class="success-container">
+          <div class="success-icon">
+            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+          </div>
+          <h2>Arquivo gerado com sucesso!</h2>
+          <p>O arquivo ICS foi baixado para o seu dispositivo. Abra-o para importar os eventos no seu aplicativo de calendário.</p>
+
+          <button class="btn-primary" id="btn-restart" aria-label="Gerar outro calendário" style="margin: 0 auto;">
+            <i class="fa-solid fa-arrow-rotate-left" aria-hidden="true"></i>
+            Gerar Outro Calendário
+          </button>
+
+          <img src="assets/flflogo.png" alt="" class="success-logo" aria-hidden="true" />
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-text">
+      <span>Desenvolvido por Luis Augusto M. Pontes</span>
+      <span aria-hidden="true">—</span>
+      <a href="https://instagram.com/luisaugusto.mp" target="_blank" rel="noopener noreferrer" class="footer-link" aria-label="Instagram de Luis Augusto">
+        <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+        @luisaugusto.mp
+      </a>
+    </div>
+  </footer>
+
+  <!-- App Script -->
+  <script src="app.js"></script>
+</body>
+</html>

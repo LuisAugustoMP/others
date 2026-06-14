@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso Básico de Leitura Bíblica — IBAVA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css">
+  <link rel="stylesheet"
+    href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css">
+
+  <style>
+    :root {
+      --green: #2EA82A;
+      --green-dk: #1A6B17;
+      --green-lt: #6FCA6B;
+      --green-pale: #EDF7EC;
+      --blue: #18A8C8;
+      --blue-dk: #0C7A95;
+      --blue-pale: #E8F6FA;
+      --ink: #1A2A1E;
+      --muted: #607068;
+      --border: #D3E5D4;
+      --bg: #F8FAF8;
+      --white: #FFFFFF;
+      --r: 16px;
+      --r-lg: 24px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    /* ─── HERO ────────────────────────────────────────────────── */
+    .hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--green-dk), var(--green), var(--blue), var(--blue-dk));
+    }
+
+    .hero-deco {
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 260px;
+      height: 260px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .hero-deco::after {
+      content: '';
+      position: absolute;
+      inset: 24px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+    }
+
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 44px;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-logo {
+      width: 160px;
+      filter: drop-shadow(0 4px 14px rgba(30, 107, 23, .2));
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--green-dk);
+      margin-bottom: 12px;
+    }
+
+    .hero-eyebrow::after {
+      content: '';
+      width: 60px;
+      height: 1px;
+      background: var(--green-lt);
+    }
+
+    .hero-eyebrow i {
+      font-size: .8rem;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.9rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.13;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--green-dk);
+    }
+
+    .hero-desc {
+      font-size: .92rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+      max-width: 460px;
+    }
+
+    .hero-stats {
+      display: inline-flex;
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+    }
+
+    .stat {
+      padding: 14px 22px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+      min-width: 96px;
+    }
+
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat i {
+      font-size: 1rem;
+      color: var(--green);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: .65rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      margin-top: 3px;
+    }
+
+    /* ─── LAYOUT ─────────────────────────────────────────────── */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 60px 0;
+    }
+
+    section.alt {
+      background: var(--white);
+    }
+
+    /* ─── SECTION HEAD ───────────────────────────────────────── */
+    .section-head {
+      margin-bottom: 36px;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--blue-dk);
+      margin-bottom: 8px;
+    }
+
+    .section-label i {
+      font-size: .8rem;
+      color: var(--blue);
+    }
+
+    .section-head h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.2;
+      border-left: 3px solid var(--green);
+      padding-left: 14px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      margin-top: 8px;
+      padding-left: 17px;
+      font-size: .88rem;
+    }
+
+    /* ─── DESC BOX ───────────────────────────────────────────── */
+    .desc-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--green);
+      border-radius: var(--r);
+      padding: 30px 34px;
+    }
+
+    .desc-box p {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .verse {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .83rem;
+      color: var(--green-dk);
+      font-style: italic;
+    }
+
+    .verse i {
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: var(--green);
+    }
+
+    /* ─── OVERVIEW ───────────────────────────────────────────── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .ov-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 18px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .ov-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: var(--green-pale);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .ov-icon i {
+      color: var(--green-dk);
+      font-size: .88rem;
+    }
+
+    .ov-card h3 {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .ov-card p {
+      font-size: .76rem;
+      color: var(--muted);
+    }
+
+    /* ─── SESSIONS ───────────────────────────────────────────── */
+    .sessions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .session-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      transition: box-shadow .2s, border-color .2s;
+    }
+
+    .session-card:hover {
+      box-shadow: 0 6px 22px rgba(30, 107, 23, .09);
+      border-color: var(--green-lt);
+    }
+
+    .session-num {
+      background: var(--green-pale);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 16px 8px;
+    }
+
+    .session-num i {
+      font-size: .95rem;
+      color: var(--green-dk);
+    }
+
+    .session-num span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--green-dk);
+      line-height: 1;
+    }
+
+    .session-num small {
+      font-size: .58rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+    }
+
+    .session-body {
+      padding: 20px 22px;
+    }
+
+    .session-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .session-body>p {
+      font-size: .855rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+      line-height: 1.7;
+    }
+
+    .topics {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+
+    .topics li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: .81rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .topics li i {
+      color: var(--green);
+      font-size: .65rem;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    .session-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tag {
+      background: var(--green-pale);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 2px 10px;
+      font-size: .66rem;
+      color: var(--green-dk);
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .tag.blue {
+      background: var(--blue-pale);
+      border-color: #B8DDE8;
+      color: var(--blue-dk);
+    }
+
+    .tag i {
+      font-size: .62rem;
+    }
+
+    /* ─── OBJECTIVES ─────────────────────────────────────────── */
+    .obj-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+      gap: 12px;
+    }
+
+    .obj-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 18px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .obj-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: var(--blue-pale);
+      border: 1px solid #B8DDE8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .obj-icon i {
+      color: var(--blue-dk);
+      font-size: .9rem;
+    }
+
+    .obj-card h4 {
+      font-size: .86rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .obj-card p {
+      font-size: .77rem;
+      color: var(--muted);
+    }
+
+    /* ─── METHODOLOGY ────────────────────────────────────────── */
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+
+    .method-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 20px 16px;
+      text-align: center;
+    }
+
+    .method-card i {
+      font-size: 1.3rem;
+      color: var(--blue);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .method-card h4 {
+      font-size: .84rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .method-card p {
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      background: transparent;
+      color: var(--muted);
+      padding: 44px 24px 36px;
+      text-align: center;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green-dk), var(--green), var(--blue));
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    footer img.footer-logo {
+      width: 50px;
+      opacity: .8;
+    }
+
+    footer .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: .05em;
+    }
+
+    footer .brand span {
+      color: var(--green);
+    }
+
+    footer .brand small {
+      display: block;
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+    }
+
+    .footer-divider {
+      width: 36px;
+      height: 1px;
+      background: var(--border);
+      margin: 14px auto;
+    }
+
+    footer p {
+      font-size: .78rem;
+    }
+
+    footer .verse-footer {
+      margin-top: 8px;
+      font-size: .72rem;
+      color: var(--green-dk);
+      font-style: italic;
+      opacity: .85;
+    }
+
+    @media (max-width: 580px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 20px;
+      }
+
+      .hero-logo {
+        margin: 0 auto;
+        width: 130px;
+      }
+
+      .hero-eyebrow {
+        justify-content: center;
+      }
+
+      .hero-eyebrow::after {
+        display: none;
+      }
+
+      .hero-stats {
+        width: 100%;
+      }
+
+      .stat {
+        flex: 1;
+        min-width: 0;
+        padding: 12px 8px;
+      }
+
+      .session-card {
+        grid-template-columns: 58px 1fr;
+      }
+
+      .desc-box {
+        padding: 20px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══ HERO ══════════════════════════════════════════════════ -->
+  <header class="hero">
+    <div class="hero-deco"></div>
+    <div class="hero-inner">
+      <img src="IbavaNovo.png" alt="Logo IBAVA" class="hero-logo">
+      <div class="hero-text">
+        <div class="hero-eyebrow">
+          <i class="fi fi-sr-book-open-cover"></i>
+          Igreja Batista Vale do Acaraú
+        </div>
+        <h1>Curso Básico de<br><em>Leitura Bíblica</em></h1>
+        <p class="hero-desc">Um percurso formativo — da escolha de uma tradução até o coração do Evangelho da Graça.</p>
+        <div class="hero-stats">
+          <div class="stat">
+            <i class="fi fi-sr-clock"></i>
+            <div class="stat-num">10h</div>
+            <div class="stat-label">Duração</div>
+          </div>
+          <div class="stat">
+            <i class="fi fi-sr-calendar-days"></i>
+            <div class="stat-num">6</div>
+            <div class="stat-label">Encontros</div>
+          </div>
+          <div class="stat">
+            <i class="fi fi-sr-layers"></i>
+            <div class="stat-num">4</div>
+            <div class="stat-label">Módulos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ APRESENTAÇÃO ══════════════════════════════════════════ -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div class="section-label"><i class="fi fi-sr-comment-info"></i> Sobre o Curso</div>
+        <h2>Da Palavra ao Coração</h2>
+        <p>Uma jornada acessível para quem deseja ler, entender e viver as Escrituras Sagradas.</p>
+      </div>
+
+      <div class="desc-box">
+        <p>Este curso conduz o participante em uma jornada que começa no texto — aprendendo a escolher uma boa tradução,
+          entender a estrutura das Escrituras e desenvolver uma leitura consistente — e avança progressivamente pelos
+          fundamentos da fé cristã, pela compreensão honesta da condição humana e pela natureza do pecado, até chegar ao
+          coração de tudo: a graça imerecida de Deus revelada em Jesus Cristo.</p>
+        <div class="verse">
+          <i class="fi fi-sr-quote-right"></i>
+          <span>Lâmpada para os meus pés é a tua palavra, e luz para o meu caminho. — Salmos 119:105</span>
+        </div>
+      </div>
+
+      <div class="overview-grid">
+        <div class="ov-card">
+          <div class="ov-icon"><i class="fi fi-sr-bible"></i></div>
+          <div>
+            <h3>A Bíblia</h3>
+            <p>Escolher, ler e interpretar as Escrituras</p>
+          </div>
+        </div>
+        <div class="ov-card">
+          <div class="ov-icon"><i class="fi fi-sr-cross-religion"></i></div>
+          <div>
+            <h3>A Fé</h3>
+            <p>Fundamentos e bases do Cristianismo histórico</p>
+          </div>
+        </div>
+        <div class="ov-card">
+          <div class="ov-icon"><i class="fi fi-sr-user"></i></div>
+          <div>
+            <h3>O Humano</h3>
+            <p>Natureza humana, pecado e necessidade de redenção</p>
+          </div>
+        </div>
+        <div class="ov-card">
+          <div class="ov-icon"><i class="fi fi-sr-heart"></i></div>
+          <div>
+            <h3>A Graça</h3>
+            <p>O Evangelho como resposta definitiva à condição humana</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ENCONTROS ══════════════════════════════════════════════ -->
+  <section class="alt">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-label"><i class="fi fi-rr-list"></i> Conteúdo Programático</div>
+        <h2>Os 6 Encontros</h2>
+        <p>Cada encontro tem duração de 1h40, com ensino expositivo, leitura de texto e discussão em grupo.</p>
+      </div>
+
+      <div class="sessions">
+
+        <div class="session-card">
+          <div class="session-num">
+            <i class="fi fi-sr-book-open-cover"></i>
+            <span>01</span>
+            <small>1h40</small>
+          </div>
+          <div class="session-body">
+            <h3>A Bíblia: O Que É e Por Que Ler</h3>
+            <p>Uma visão panorâmica das Escrituras e um convite fundamentado à leitura regular — não como obrigação
+              religiosa, mas como encontro com Deus.</p>
+            <ul class="topics">
+              <li><i class="fi fi-sr-angle-right"></i>O que é a Bíblia? Origem, autoria humana e divina, processo de
+                formação do cânon</li>
+              <li><i class="fi fi-sr-angle-right"></i>Estrutura das Escrituras: Antigo e Novo Testamento, divisões
+                internas e gêneros literários</li>
+              <li><i class="fi fi-sr-angle-right"></i>A grande narrativa bíblica: criação, queda, redenção e nova
+                criação</li>
+              <li><i class="fi fi-sr-angle-right"></i>Por que ler a Bíblia hoje? A Palavra como revelação viva e pessoal
+                de Deus</li>
+            </ul>
+            <div class="session-tags">
+              <span class="tag"><i class="fi fi-sr-layers"></i> Módulo 1</span>
+              <span class="tag">Panorama</span>
+              <span class="tag">Cânon</span>
+              <span class="tag">Narrativa bíblica</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="session-card">
+          <div class="session-num">
+            <i class="fi fi-sr-language"></i>
+            <span>02</span>
+            <small>1h40</small>
+          </div>
+          <div class="session-body">
+            <h3>Como Escolher uma Tradução e Como Ler</h3>
+            <p>Ferramentas concretas para começar bem: entender as diferenças entre traduções e criar o hábito de uma
+              leitura regular e significativa.</p>
+            <ul class="topics">
+              <li><i class="fi fi-sr-angle-right"></i>Tradução formal vs. tradução dinâmica vs. paráfrase: princípios,
+                diferenças e usos adequados</li>
+              <li><i class="fi fi-sr-angle-right"></i>Comparativo prático: ARC, NVI, NAA, NTLH e A Mensagem — quando
+                usar cada uma</li>
+              <li><i class="fi fi-sr-angle-right"></i>Como ler no contexto: versículo, parágrafo, livro, coleção — o
+                erro de ler isolado</li>
+              <li><i class="fi fi-sr-angle-right"></i>Métodos de leitura: devocional, indutivo e temático — como aplicar
+                na prática</li>
+              <li><i class="fi fi-sr-angle-right"></i>Construindo um plano de leitura realista e sustentável para o dia
+                a dia</li>
+            </ul>
+            <div class="session-tags">
+              <span class="tag"><i class="fi fi-sr-layers"></i> Módulo 1</span>
+              <span class="tag">Tradução</span>
+              <span class="tag">Método de leitura</span>
+              <span class="tag">Prática</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="session-card">
+          <div class="session-num">
+            <i class="fi fi-sr-star"></i>
+            <span>03</span>
+            <small>1h40</small>
+          </div>
+          <div class="session-body">
+            <h3>Os Fundamentos da Fé e as Bases do Cristianismo</h3>
+            <p>O que a Igreja sempre confessou ao longo da história — dos credos à encarnação. Os pilares inegociáveis
+              da fé cristã e por que eles importam.</p>
+            <ul class="topics">
+              <li><i class="fi fi-sr-angle-right"></i>O que é fé? A diferença entre crença, confiança e compromisso nas
+                Escrituras</li>
+              <li><i class="fi fi-sr-angle-right"></i>A Trindade: Pai, Filho e Espírito Santo — distinção de pessoas,
+                unidade de essência</li>
+              <li><i class="fi fi-sr-angle-right"></i>O Credo Apostólico como mapa da fé cristã histórica e por que
+                ainda nos guia</li>
+              <li><i class="fi fi-sr-angle-right"></i>A encarnação e a ressurreição de Jesus como fatos históricos e
+                seus significados teológicos</li>
+              <li><i class="fi fi-sr-angle-right"></i>O que torna o Cristianismo único: graça, não desempenho</li>
+            </ul>
+            <div class="session-tags">
+              <span class="tag"><i class="fi fi-sr-layers"></i> Módulo 2</span>
+              <span class="tag">Fé</span>
+              <span class="tag">Trindade</span>
+              <span class="tag">Credo</span>
+              <span class="tag">Ressurreição</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="session-card">
+          <div class="session-num">
+            <i class="fi fi-sr-user"></i>
+            <span>04</span>
+            <small>1h40</small>
+          </div>
+          <div class="session-body">
+            <h3>Quem é o Ser Humano? A Realidade da Criatura</h3>
+            <p>A visão bíblica sobre a natureza humana — a grandeza de ser feito à imagem de Deus e a tensão real entre
+              dignidade e fragilidade.</p>
+            <ul class="topics">
+              <li><i class="fi fi-sr-angle-right"></i>Imago Dei: o que significa ser feito à imagem e semelhança de Deus
+                — implicações práticas</li>
+              <li><i class="fi fi-sr-angle-right"></i>A constituição humana: corpo, alma e espírito — como a Bíblia
+                descreve o ser humano</li>
+              <li><i class="fi fi-sr-angle-right"></i>Dignidade humana e sua fonte: por que toda vida tem valor
+                incondicional</li>
+              <li><i class="fi fi-sr-angle-right"></i>A condição real: criados para comunhão com Deus, mas vivendo em
+                distância Dele</li>
+              <li><i class="fi fi-sr-angle-right"></i>O anseio universal: por que toda cultura e toda pessoa busca
+                transcendência</li>
+            </ul>
+            <div class="session-tags">
+              <span class="tag"><i class="fi fi-sr-layers"></i> Módulo 3</span>
+              <span class="tag">Imago Dei</span>
+              <span class="tag">Dignidade</span>
+              <span class="tag">Natureza humana</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="session-card">
+          <div class="session-num">
+            <i class="fi fi-sr-heart-crack"></i>
+            <span>05</span>
+            <small>1h40</small>
+          </div>
+          <div class="session-body">
+            <h3>A Natureza e as Consequências do Pecado</h3>
+            <p>Uma abordagem honesta e bíblica sobre o pecado — não como tema tabu, mas como realidade que explica nossa
+              condição e aponta para a necessidade do Evangelho.</p>
+            <ul class="topics">
+              <li><i class="fi fi-sr-angle-right"></i>O que é o pecado? Definição bíblica além do senso moral comum —
+                errar o alvo de Deus</li>
+              <li><i class="fi fi-sr-angle-right"></i>A origem: a queda em Gênesis 3 — o que mudou no ser humano e no
+                mundo</li>
+              <li><i class="fi fi-sr-angle-right"></i>Pecado original e pecados pessoais — distinção, relação e
+                responsabilidade</li>
+              <li><i class="fi fi-sr-angle-right"></i>Consequências: morte espiritual, alienação de Deus, quebra das
+                relações e desordem interior</li>
+              <li><i class="fi fi-sr-angle-right"></i>O diagnóstico bíblico honesto como preparação necessária para
+                ouvir o Evangelho</li>
+            </ul>
+            <div class="session-tags">
+              <span class="tag"><i class="fi fi-sr-layers"></i> Módulo 3</span>
+              <span class="tag">Pecado</span>
+              <span class="tag">Queda</span>
+              <span class="tag">Consequências</span>
+              <span class="tag">Diagnóstico</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="session-card">
+          <div class="session-num">
+            <i class="fi fi-sr-gift"></i>
+            <span>06</span>
+            <small>1h40</small>
+          </div>
+          <div class="session-body">
+            <h3>O Evangelho da Graça — Encerramento</h3>
+            <p>O coração do curso: a boa notícia de que Deus não deixa a história terminar no pecado. A graça como
+              resposta definitiva e imerecida à condição humana.</p>
+            <ul class="topics">
+              <li><i class="fi fi-sr-angle-right"></i>O que é o Evangelho? Mais do que um convite — uma declaração do
+                que Deus fez em Cristo</li>
+              <li><i class="fi fi-sr-angle-right"></i>Graça, misericórdia e justificação pela fé — distinções que mudam
+                tudo</li>
+              <li><i class="fi fi-sr-angle-right"></i>Salvação como presente, não conquista — o que isso muda na nossa
+                maneira de viver</li>
+              <li><i class="fi fi-sr-angle-right"></i>O Evangelho e a leitura da Bíblia: como ele ilumina as Escrituras
+                do Gênesis ao Apocalipse</li>
+              <li><i class="fi fi-sr-angle-right"></i>Próximos passos: crescer na Palavra, na oração e na comunidade da
+                IBAVA</li>
+            </ul>
+            <div class="session-tags">
+              <span class="tag"><i class="fi fi-sr-layers"></i> Módulo 4</span>
+              <span class="tag blue">Evangelho</span>
+              <span class="tag blue">Graça</span>
+              <span class="tag blue">Justificação</span>
+              <span class="tag blue">Encerramento</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ OBJETIVOS ══════════════════════════════════════════════ -->
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div class="section-label"><i class="fi fi-rr-target"></i> O que você vai alcançar</div>
+        <h2>Objetivos do Curso</h2>
+      </div>
+      <div class="obj-grid">
+        <div class="obj-card">
+          <div class="obj-icon"><i class="fi fi-sr-search"></i></div>
+          <div>
+            <h4>Ler com Compreensão</h4>
+            <p>Saber escolher uma tradução e desenvolver uma leitura regular e significativa das Escrituras.</p>
+          </div>
+        </div>
+        <div class="obj-card">
+          <div class="obj-icon"><i class="fi fi-sr-layers"></i></div>
+          <div>
+            <h4>Conhecer os Fundamentos</h4>
+            <p>Articular com clareza as bases históricas e teológicas da fé cristã.</p>
+          </div>
+        </div>
+        <div class="obj-card">
+          <div class="obj-icon"><i class="fi fi-sr-eye"></i></div>
+          <div>
+            <h4>Ver a Realidade Humana</h4>
+            <p>Compreender a condição humana à luz das Escrituras, incluindo a natureza e os efeitos do pecado.</p>
+          </div>
+        </div>
+        <div class="obj-card">
+          <div class="obj-icon"><i class="fi fi-sr-heart"></i></div>
+          <div>
+            <h4>Abraçar o Evangelho</h4>
+            <p>Entender e experimentar a graça de Deus como resposta definitiva à condição humana.</p>
+          </div>
+        </div>
+        <div class="obj-card">
+          <div class="obj-icon"><i class="fi fi-sr-users"></i></div>
+          <div>
+            <h4>Crescer em Comunidade</h4>
+            <p>Desenvolver o hábito de estudar a Bíblia junto, valorizando o corpo de Cristo na IBAVA.</p>
+          </div>
+        </div>
+        <div class="obj-card">
+          <div class="obj-icon"><i class="fi fi-sr-bulb"></i></div>
+          <div>
+            <h4>Aplicar na Vida</h4>
+            <p>Conectar a Palavra de Deus às situações cotidianas de forma prática e transformadora.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ METODOLOGIA ════════════════════════════════════════════ -->
+  <section class="alt">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-label"><i class="fi fi-rr-settings"></i> Como acontece</div>
+        <h2>Metodologia</h2>
+        <p>Cada encontro combina ensino, leitura e conversa — sem exigir conhecimento prévio de teologia.</p>
+      </div>
+      <div class="method-grid">
+        <div class="method-card">
+          <i class="fi fi-sr-chalkboard-user"></i>
+          <h4>Ensino Expositivo</h4>
+          <p>Exposição clara e acessível dos temas bíblicos e teológicos de cada encontro.</p>
+        </div>
+        <div class="method-card">
+          <i class="fi fi-sr-comments"></i>
+          <h4>Discussão em Grupo</h4>
+          <p>Perguntas reflexivas que incentivam participação e o compartilhar de experiências.</p>
+        </div>
+        <div class="method-card">
+          <i class="fi fi-sr-book-bookmark"></i>
+          <h4>Leitura Guiada</h4>
+          <p>Passagens selecionadas lidas e comentadas juntos durante o encontro.</p>
+        </div>
+        <div class="method-card">
+          <i class="fi fi-sr-home"></i>
+          <h4>Prática Semanal</h4>
+          <p>Pequenas leituras e reflexões sugeridas para os dias entre os encontros.</p>
+        </div>
+        <div class="method-card">
+          <i class="fi fi-sr-person-praying"></i>
+          <h4>Momentos de Oração</h4>
+          <p>Cada encontro abre e fecha em oração, integrando estudo e espiritualidade.</p>
+        </div>
+        <div class="method-card">
+          <i class="fi fi-sr-diploma"></i>
+          <h4>Certificado IBAVA</h4>
+          <p>Certificado de conclusão emitido pela Igreja ao participante que completar o curso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <img src="IbavaNovo.png" alt="Logo IBAVA" class="footer-logo">
+      <div class="brand">
+        <span>IBAVA</span>
+        <small>Igreja Batista Vale do Acaraú</small>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <p>Curso Básico de Leitura Bíblica &nbsp;·&nbsp; 10 horas &nbsp;·&nbsp; 6 encontros</p>
+    <p class="verse-footer">"A tua palavra é a verdade." — João 17:17</p>
+  </footer>
+
+</body>
+
+</html>
