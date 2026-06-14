@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dominó Mexicano — Manual Rápido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+
+  :root{
+    /* Dark Mode Palette */
+    --bg: #121212;
+    --surface: #1E1E1E;
+    --surface-2: #2C2C2E;
+    --ink: #F5F5F7;
+    --ink-soft: #A1A1A6;
+    --ink-faint: #636366;
+    --line: #38383A;
+
+    --orange: #FF8A50;
+    --orange-soft: #3A2318;
+    --orange-ink: #FFA97A;
+
+    --teal: #3FB6B0;
+    --teal-soft: #173331;
+    --teal-ink: #79E2DC;
+
+    --gold: #FFC857;
+    --gold-soft: #3A2E13;
+    --gold-ink: #FCD067;
+
+    --red: #FF8E86;
+    --red-soft: #3A1E1C;
+    --red-ink: #FFACA6;
+
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  img,svg{ max-width:100%; display:block; }
+
+  h1,h2,h3,h4{
+    font-family:'Outfit', sans-serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+
+  p{ margin:0 0 0.8em 0; }
+  p:last-child{ margin-bottom:0; }
+
+  a{ color: var(--orange-ink); text-decoration:none; }
+
+  /* ============ TOPBAR ============ */
+  .topbar{
+    position: sticky;
+    top:0;
+    z-index: 50;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    padding: 14px 20px;
+    background: rgba(18, 18, 18, 0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:700;
+    font-size:1.05rem;
+  }
+  .topbar .brand .badge-icon{
+    width:36px; height:36px;
+    border-radius: 12px;
+    background: var(--orange);
+    color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1rem;
+  }
+
+  /* ============ LAYOUT ============ */
+  .layout{
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+  }
+
+  /* ============ MAIN ============ */
+  main{ flex:1; min-width:0; max-width: 700px; margin: 0 auto; }
+
+  section{
+    scroll-margin-top: 86px;
+    margin-bottom: 38px;
+  }
+
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.7rem;
+    font-weight:700;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color: var(--orange-ink);
+    margin-bottom:10px;
+  }
+  .eyebrow i{ font-size:0.8rem; }
+
+  section h2{
+    font-size: clamp(1.35rem, 1.1rem + 1vw, 1.8rem);
+    margin-bottom: 10px;
+  }
+  section h3{
+    font-size:1.05rem;
+    margin: 18px 0 8px;
+  }
+  section > p{ color: var(--ink); font-size: 0.98rem; }
+  .lede{ color: var(--ink-soft); font-size:1.02rem; }
+
+  /* ============ HERO ============ */
+  .hero{
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: clamp(22px, 5vw, 40px);
+    margin-bottom: 36px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .hero h1{
+    font-size: clamp(1.9rem, 1.5rem + 2vw, 2.9rem);
+    margin: 4px 0 10px;
+  }
+  .hero .lede{ max-width: 500px; margin: 0 auto 20px; }
+
+  .quickfacts{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+    margin-bottom: 30px;
+  }
+  .quickfacts .fact{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background: var(--surface);
+    border:1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size:0.86rem;
+    font-weight:600;
+  }
+  .quickfacts .fact i{ color: var(--orange); }
+
+  /* ---- hub diagram (signature visual) ---- */
+  .hub-wrap{ display:flex; flex-direction:column; align-items:center; gap: 16px; }
+  .hub-diagram{
+    position: relative;
+    width: min(320px, 75vw);
+    height: min(320px, 75vw);
+    margin: 6px auto 2px;
+  }
+  .hub-track{
+    position:absolute;
+    top:50%; left:50%;
+    width:2px;
+    transform-origin: top center;
+    border-left: 2px dashed var(--line);
+    z-index:1;
+  }
+  .hub-track.is-mex{ border-left-color: var(--orange-soft); }
+
+  .hub-center{
+    position:absolute;
+    top:50%; left:50%;
+    transform: translate(-50%,-50%);
+    width: 100px; height: 66px;
+    background: var(--gold-soft);
+    border: 2px solid var(--gold);
+    border-radius: 14px;
+    display:flex;
+    z-index:3;
+    overflow:hidden;
+  }
+  .hub-center .half{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    font-size:1.35rem;
+    color: var(--gold-ink);
+  }
+  .hub-center .half:first-child{ border-right: 2px solid var(--gold); }
+
+  .hub-station{
+    position:absolute;
+    top:50%; left:50%;
+    width:46px; height:46px;
+    transform: translate(-50%,-50%);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700;
+    font-size:0.95rem;
+    z-index:2;
+  }
+  .hub-station.player{
+    background: var(--teal-soft);
+    color: var(--teal-ink);
+    border: 2px solid var(--teal);
+  }
+  .hub-station.mex{
+    background: var(--orange);
+    color:#fff;
+    border: 2px solid var(--orange);
+    width:52px; height:52px;
+  }
+
+  .hub-legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap: 16px;
+    justify-content:center;
+    font-size:0.82rem;
+    color: var(--ink-soft);
+  }
+  .hub-legend span{ display:flex; align-items:center; gap:8px; font-weight:600; }
+  .hub-legend .dot{ width:13px; height:13px; border-radius:50%; display:inline-block; }
+  .hub-legend .dot.gold{ background: var(--gold); }
+  .hub-legend .dot.teal{ background: var(--teal); }
+  .hub-legend .dot.orange{ background: var(--orange); }
+
+  /* ============ ITEM LIST ============ */
+  .item-list{ list-style:none; margin:14px 0 0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .item-list li{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    background: var(--surface-2);
+    border:1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 13px 16px;
+  }
+  .item-list .ico{
+    flex-shrink:0;
+    width:36px; height:36px;
+    border-radius:10px;
+    background: var(--surface);
+    color: var(--orange-ink);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1rem;
+  }
+  .item-list strong{ display:block; margin-bottom:1px; font-size:0.96rem; }
+  .item-list span.desc{ color: var(--ink-soft); font-size:0.9rem; }
+
+  /* ============ STEPS (numbered sequence) ============ */
+  .steps{ list-style:none; margin: 16px 0 0; padding:0; position:relative; }
+  .steps li{ position:relative; display:flex; gap:14px; padding-bottom: 18px; }
+  .steps li:last-child{ padding-bottom:0; }
+  .steps li::before{
+    content:"";
+    position:absolute;
+    left:15px; top:34px; bottom:0;
+    width:2px;
+    background: var(--line);
+  }
+  .steps li:last-child::before{ display:none; }
+  .step-num{
+    flex-shrink:0;
+    width:32px; height:32px;
+    border-radius:50%;
+    background: var(--orange);
+    color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700;
+    font-size:0.9rem;
+    z-index:1;
+  }
+  .step-body{ padding-top:2px; }
+  .step-body h4{ font-size:0.98rem; margin-bottom:2px; font-weight:700; }
+  .step-body p{ color: var(--ink-soft); font-size:0.92rem; }
+
+  /* ============ DOMINO TILE COMPONENT ============ */
+  .tile{
+    display:inline-flex;
+    align-items:center;
+    border:2px solid var(--ink-faint);
+    border-radius:8px;
+    overflow:hidden;
+    font-weight:700;
+    font-size:0.9em;
+    vertical-align:middle;
+    margin: 0 2px;
+    background: var(--surface);
+  }
+  .tile .half{ padding:2px 7px; min-width:1.2em; text-align:center; }
+  .tile .half:first-child{ border-right:2px solid var(--ink-faint); }
+  .tile.is-double{ border-color: var(--gold); background: var(--gold-soft); }
+  .tile.is-double .half{ color: var(--gold-ink); }
+  .tile.is-double .half:first-child{ border-right-color: var(--gold); }
+
+  /* ============ CALLOUTS ============ */
+  .callout{
+    display:flex;
+    gap:12px;
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin: 16px 0;
+  }
+  .callout .ico{
+    flex-shrink:0;
+    width:32px; height:32px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.92rem;
+    background: var(--surface);
+  }
+  .callout h4{
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:4px;
+  }
+  .callout p{ font-size:0.92rem; color: var(--ink); }
+
+  .callout.tip{ background: var(--teal-soft); }
+  .callout.tip .ico{ color: var(--teal-ink); }
+  .callout.tip h4{ color: var(--teal-ink); }
+
+  .callout.warning{ background: var(--red-soft); }
+  .callout.warning .ico{ color: var(--red-ink); }
+  .callout.warning h4{ color: var(--red-ink); }
+
+  /* FAQ (details/summary) */
+  .faq-item{
+    background: var(--surface-2);
+    border:1px solid var(--line);
+    border-radius: var(--radius-md);
+    margin: 8px 0;
+    overflow:hidden;
+  }
+  .faq-item summary{
+    list-style:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding: 13px 16px;
+    font-weight:600;
+    font-size:0.92rem;
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary .q-ico{
+    flex-shrink:0;
+    width:30px; height:30px;
+    border-radius:50%;
+    background: var(--orange-soft);
+    color: var(--orange-ink);
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.86rem;
+  }
+  .faq-item summary .chev{
+    margin-left:auto;
+    color: var(--ink-faint);
+    transition: transform 0.2s ease;
+    font-size:0.82rem;
+  }
+  .faq-item[open] summary .chev{ transform: rotate(180deg); }
+  .faq-item .faq-body{
+    padding: 0 16px 14px 58px;
+    color: var(--ink-soft);
+    font-size:0.9rem;
+  }
+
+  /* ============ TABLES ============ */
+  table{
+    width:100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size:0.9rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    overflow:hidden;
+  }
+  th, td{ text-align:left; padding: 10px 14px; border-bottom:1px solid var(--line); }
+  th{
+    background: var(--surface-2);
+    font-weight:700;
+    font-size:0.78rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color: var(--ink-soft);
+  }
+  tr:last-child td{ border-bottom:none; }
+
+  /* ============ GLOSSARY ============ */
+  .glossary{ display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin-top:14px; }
+  @media (max-width:640px){ .glossary{ grid-template-columns:1fr; } }
+  .gterm{
+    background: var(--surface-2);
+    border:1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding:13px 15px;
+  }
+  .gterm .gname{ display:flex; align-items:center; gap:8px; font-weight:700; margin-bottom:3px; font-size:0.92rem; }
+  .gterm .gname i{ color: var(--orange-ink); width:18px; text-align:center; }
+  .gterm p{ color: var(--ink-soft); font-size:0.86rem; }
+
+  /* ============ FOOTER ============ */
+  footer{
+    text-align:center;
+    color: var(--ink-faint);
+    font-size:0.82rem;
+    padding-top: 16px;
+    border-top:1px solid var(--line);
+  }
+  footer i{ color: var(--orange); }
+
+  /* ============ RESPONSIVE NAV ============ */
+  @media (max-width: 480px){
+    .layout{ padding: 16px 14px 50px; }
+    .hero{ padding: 20px 14px; }
+    .quickfacts .fact{ font-size:0.78rem; padding:7px 13px; }
+  }
+
+  /* ============ PRINT ============ */
+  @media print{
+    .topbar{ display:none !important; }
+    .layout{ padding:0; max-width:100%; }
+    main{ max-width:100%; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="brand">
+      <span class="badge-icon"><i class="fa-solid fa-train"></i></span>
+      Dominó Mexicano
+    </div>
+  </div>
+
+  <div class="layout">
+    <main>
+
+      <header class="hero">
+        <div class="eyebrow"><i class="fa-solid fa-train"></i> Manual rápido</div>
+        <h1>Dominó Mexicano</h1>
+        <p class="lede">
+          Cada jogador monta seu próprio "trem" de peças a partir de uma estação central.
+          Quem ficar sem peças primeiro vence a rodada — e quem somar menos pontos no
+          final vence o jogo.
+        </p>
+
+        <div class="quickfacts">
+          <div class="fact"><i class="fa-solid fa-user-group"></i> 2 a 8 jogadores</div>
+          <div class="fact"><i class="fa-solid fa-cubes"></i> Jogo duplo-12</div>
+          <div class="fact"><i class="fa-solid fa-child-reaching"></i> A partir de 8 anos</div>
+        </div>
+
+        <div class="hub-wrap">
+          <div class="hub-diagram" id="hubDiagram"></div>
+          <div class="hub-legend">
+            <span><span class="dot gold"></span> Estação (peça carreirão)</span>
+            <span><span class="dot teal"></span> Trem de cada jogador</span>
+            <span><span class="dot orange"></span> Trem Mexicano (de todos)</span>
+          </div>
+        </div>
+      </header>
+
+      <section id="intro">
+        <div class="eyebrow"><i class="fa-solid fa-circle-info"></i> O básico</div>
+        <h2>Como funciona</h2>
+        <p>
+          Tudo começa com a peça carreirão
+          <span class="tile is-double"><span class="half">12</span><span class="half">12</span></span>
+          no centro da mesa — a <strong>estação</strong>. A partir dela saem vários
+          "trilhos": um <strong>trem pessoal</strong> para cada jogador (que só ele pode
+          usar) e o <strong>Trem Mexicano</strong>, um trilho público que qualquer um pode
+          completar.
+        </p>
+        <p>
+          Na sua vez, encaixe uma peça com o mesmo número da ponta do seu trem ou do Trem
+          Mexicano. Quem usar todas as peças primeiro vence a rodada. O jogo tem várias
+          rodadas, e quem tiver <strong>menos pontos no total</strong> vence a partida.
+        </p>
+
+        <div class="callout tip">
+          <div class="ico"><i class="fa-solid fa-lightbulb"></i></div>
+          <div>
+            <h4>Dica</h4>
+            <p>
+              Parece muita informação, mas no jogo se resume a: "minha peça encaixa em
+              algum trilho?" e "é uma dobre?". Depois da primeira rodada fica natural.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="material">
+        <div class="eyebrow"><i class="fa-solid fa-box-open"></i> Antes de começar</div>
+        <h2>O que você precisa</h2>
+
+        <ul class="item-list">
+          <li>
+            <div class="ico"><i class="fa-solid fa-cubes"></i></div>
+            <div>
+              <strong>1 jogo de dominó duplo-12</strong>
+              <span class="desc">91 peças, números de 0 a 12. Para 2-4 jogadores, um duplo-9 (55 peças) também serve.</span>
+            </div>
+          </li>
+          <li>
+            <div class="ico"><i class="fa-solid fa-circle-dot"></i></div>
+            <div>
+              <strong>Marcadores</strong>
+              <span class="desc">Um objeto diferente para cada jogador (fichas, moedas, botões), para indicar trens "abertos".</span>
+            </div>
+          </li>
+          <li>
+            <div class="ico"><i class="fa-solid fa-rectangle-list"></i></div>
+            <div>
+              <strong>Papel para pontuação</strong>
+              <span class="desc">Uma linha por jogador, uma coluna por rodada.</span>
+            </div>
+          </li>
+        </ul>
+
+        <table>
+          <thead><tr><th>Jogadores</th><th>Peças por jogador</th></tr></thead>
+          <tbody>
+            <tr><td>2</td><td>15</td></tr>
+            <tr><td>3 ou 4</td><td>14</td></tr>
+            <tr><td>5 ou 6</td><td>12</td></tr>
+            <tr><td>7 ou 8</td><td>11</td></tr>
+          </tbody>
+        </table>
+        <p class="lede" style="font-size:0.9rem">As peças restantes ficam viradas para baixo: é o <strong>estoque</strong>.</p>
+      </section>
+
+      <section id="preparo">
+        <div class="eyebrow"><i class="fa-solid fa-shuffle"></i> Montagem</div>
+        <h2>Preparando o jogo</h2>
+
+        <ol class="steps">
+          <li>
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>Embaralhe e distribua</h4>
+              <p>Vire todas as peças para baixo, misture e cada jogador compra sua mão (veja a tabela acima).</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>Forme o estoque</h4>
+              <p>O resto das peças, viradas para baixo, fica no centro como estoque.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h4>Coloque a peça carreirão 12-12</h4>
+              <p>Quem tiver essa peça a coloca no centro. Se ninguém tiver, todos compram do estoque até alguém conseguir.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <h4>É a estação!</h4>
+              <p>Todos os trens partem dela. Quem colocou a peça começa o jogo.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section id="turno">
+        <div class="eyebrow"><i class="fa-solid fa-arrows-rotate"></i> Jogando</div>
+        <h2>O turno</h2>
+        <p>
+          Na sua vez, jogue <strong>uma peça</strong> que encaixe em um destes trilhos:
+        </p>
+
+        <ul class="item-list">
+          <li>
+            <div class="ico"><i class="fa-solid fa-route"></i></div>
+            <div>
+              <strong>Seu trem</strong>
+              <span class="desc">Só você pode jogar nele, a menos que esteja com marcador (aberto).</span>
+            </div>
+          </li>
+          <li>
+            <div class="ico"><i class="fa-solid fa-train"></i></div>
+            <div>
+              <strong>Trem Mexicano</strong>
+              <span class="desc">É de todos. Qualquer jogador pode encaixar uma peça nele, em qualquer turno.</span>
+            </div>
+          </li>
+          <li>
+            <div class="ico"><i class="fa-solid fa-lock-open"></i></div>
+            <div>
+              <strong>Trem aberto de outro jogador</strong>
+              <span class="desc">Se tiver um marcador em cima, qualquer um pode jogar ali.</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="callout warning">
+          <div class="ico"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div>
+            <h4>Atenção</h4>
+            <p>Jogue só 1 peça por turno — a não ser que seja uma peça carreirão (próxima seção).</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="dobre">
+        <div class="eyebrow"><i class="fa-solid fa-clone"></i> Regra especial</div>
+        <h2>peça carreirão = jogada extra</h2>
+        <p>
+          Uma peça <strong>dobre</strong> tem o mesmo número nos dois lados, como
+          <span class="tile is-double"><span class="half">6</span><span class="half">6</span></span>.
+        </p>
+
+        <ol class="steps">
+          <li>
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>Jogou uma dobre? Jogue de novo</h4>
+              <p>Tente encaixar outra peça com o mesmo número da dobre, na jogada extra.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>Sem peça? Compre 1 do estoque</h4>
+              <p>Se servir, jogue. Se não, sua jogada extra acaba aqui.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h4>Dobre não cobrida fica em aberto</h4>
+              <p>Qualquer jogador pode cobri-la depois (e ganhar jogada extra também).</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="callout tip">
+          <div class="ico"><i class="fa-solid fa-lightbulb"></i></div>
+          <div>
+            <h4>Dica</h4>
+            <p>Tem duas peças com o mesmo número? Guarde uma para cobrir sua própria dobre depois.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="sem-jogada">
+        <div class="eyebrow"><i class="fa-solid fa-hand"></i> Quando travar</div>
+        <h2>Sem jogada possível</h2>
+
+        <ol class="steps">
+          <li>
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <h4>Compre 1 peça do estoque</h4>
+              <p>Apenas uma por turno.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <h4>Encaixou? Jogue. Não encaixou? Marque seu trem</h4>
+              <p>O marcador deixa seu trem "aberto" para todos jogarem, até você fechá-lo de novo.</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <h4>Passe a vez</h4>
+              <p>O jogo segue para o próximo jogador.</p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="callout tip">
+          <div class="ico"><i class="fa-solid fa-lightbulb"></i></div>
+          <div>
+            <h4>Dica</h4>
+            <p>Quando puder jogar no seu trem de novo, você decide: tira o marcador (fica privado outra vez) ou deixa aberto por estratégia.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="pontuacao">
+        <div class="eyebrow"><i class="fa-solid fa-calculator"></i> Fim da rodada</div>
+        <h2>Pontuação</h2>
+        <p>
+          A rodada acaba quando alguém zera a mão (vence a rodada) ou quando ninguém
+          consegue jogar e o estoque acabou (rodada "trancada").
+        </p>
+        <p>
+          Cada jogador soma os números das peças que sobraram na mão — essa é sua
+          pontuação. Quem zerou marca <strong>0</strong>.
+        </p>
+
+        <table>
+          <thead><tr><th>Situação</th><th>Pontos</th></tr></thead>
+          <tbody>
+            <tr><td>Zerou a mão</td><td>0</td></tr>
+            <tr><td>Peças restantes</td><td>Soma dos números das peças</td></tr>
+          </tbody>
+        </table>
+
+        <p style="font-size:0.92rem; color:var(--ink-soft)">
+          Exemplo: restou
+          <span class="tile"><span class="half">6</span><span class="half">4</span></span>
+          e
+          <span class="tile is-double"><span class="half">3</span><span class="half">3</span></span>?
+          São 6+4+3+3 = <strong>16 pontos</strong>.
+        </p>
+
+        <div class="callout tip">
+          <div class="ico"><i class="fa-solid fa-lightbulb"></i></div>
+          <div>
+            <h4>Próximas rodadas</h4>
+            <p>
+              Cada rodada começa com uma dobre diferente, de 12-12 até 0-0 (13 rodadas no
+              duplo-12). No final, some os pontos de todas as rodadas — <strong>menos
+              pontos vence</strong>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq">
+        <div class="eyebrow"><i class="fa-solid fa-circle-question"></i> Tira-dúvidas</div>
+        <h2>Dúvidas comuns</h2>
+
+        <details class="faq-item">
+          <summary>
+            <span class="q-ico"><i class="fa-solid fa-circle-question"></i></span>
+            Posso jogar no meu trem sem marcador nele?
+            <i class="fa-solid fa-chevron-down chev"></i>
+          </summary>
+          <div class="faq-body"><p>Sim, sempre. O marcador só controla quando os <strong>outros</strong> podem jogar nele.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span class="q-ico"><i class="fa-solid fa-circle-question"></i></span>
+            O Trem Mexicano também usa marcador?
+            <i class="fa-solid fa-chevron-down chev"></i>
+          </summary>
+          <div class="faq-body"><p>Não. Ele já é público desde o início, sempre disponível para todos.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span class="q-ico"><i class="fa-solid fa-circle-question"></i></span>
+            Sou obrigado a jogar se tiver uma peça que encaixa?
+            <i class="fa-solid fa-chevron-down chev"></i>
+          </summary>
+          <div class="faq-body"><p>Sim. Comprar do estoque e marcar o trem só vale quando nenhuma peça da sua mão encaixa em lugar nenhum.</p></div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <span class="q-ico"><i class="fa-solid fa-circle-question"></i></span>
+            Posso esconder minhas peças?
+            <i class="fa-solid fa-chevron-down chev"></i>
+          </summary>
+          <div class="faq-body"><p>Sim, isso faz parte do jogo. Use um cavalete ou mantenha as peças de pé, de frente para você.</p></div>
+        </details>
+      </section>
+
+      <section id="glossario">
+        <div class="eyebrow"><i class="fa-solid fa-book-open"></i> Consulta rápida</div>
+        <h2>Glossário</h2>
+
+        <div class="glossary">
+          <div class="gterm">
+            <div class="gname"><i class="fa-solid fa-circle-nodes"></i> Estação</div>
+            <p>peça carreirão central. Ponto de partida de todos os trens.</p>
+          </div>
+          <div class="gterm">
+            <div class="gname"><i class="fa-solid fa-route"></i> Trem pessoal</div>
+            <p>Fileira de cada jogador. Só ele joga, a menos que esteja aberto.</p>
+          </div>
+          <div class="gterm">
+            <div class="gname"><i class="fa-solid fa-train"></i> Trem Mexicano</div>
+            <p>Trilho público, aberto a todos os jogadores.</p>
+          </div>
+          <div class="gterm">
+            <div class="gname"><i class="fa-solid fa-flag"></i> Marcador</div>
+            <p>Ficha que "abre" o seu trem para os outros.</p>
+          </div>
+          <div class="gterm">
+            <div class="gname"><i class="fa-solid fa-layer-group"></i> Estoque</div>
+            <p>Peças viradas para baixo, usadas para compras.</p>
+          </div>
+          <div class="gterm">
+            <div class="gname"><i class="fa-solid fa-bolt"></i> Jogada extra</div>
+            <p>Ganha ao encaixar uma peça carreirão.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <p><i class="fa-solid fa-train"></i> Dominó Mexicano — Manual rápido · Boa partida!</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <script>
+    // Build the hub diagram (signature visual)
+    const hub = document.getElementById('hubDiagram');
+    const stations = [
+      { angle: 0,   type: 'player' },
+      { angle: 60,  type: 'player' },
+      { angle: 120, type: 'player' },
+      { angle: 180, type: 'mex' },
+      { angle: 240, type: 'player' },
+      { angle: 300, type: 'player' },
+    ];
+    const radius = 120;
+
+    stations.forEach(st => {
+      const track = document.createElement('div');
+      track.className = 'hub-track' + (st.type === 'mex' ? ' is-mex' : '');
+      track.style.height = radius + 'px';
+      track.style.transform = `translateX(-50%) rotate(${st.angle}deg)`;
+      hub.appendChild(track);
+
+      const node = document.createElement('div');
+      node.className = 'hub-station ' + st.type;
+      node.style.transform = `rotate(${st.angle}deg) translateY(-${radius}px) rotate(${-st.angle}deg) translate(-50%,-50%)`;
+      node.innerHTML = st.type === 'mex' ? '<i class="fa-solid fa-train"></i>' : '<i class="fa-solid fa-user"></i>';
+      hub.appendChild(node);
+    });
+
+    const center = document.createElement('div');
+    center.className = 'hub-center';
+    center.innerHTML = '<span class="half">12</span><span class="half">12</span>';
+    hub.appendChild(center);
+  </script>
+
+</body>
+</html>
