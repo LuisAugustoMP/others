@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Placar Dominó Mexicano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --bg-color: #0B0F14;
+    --card-bg: #111827;
+    --text-main: #F3F4F6;
+    --text-muted: #9CA3AF;
+    --border-color: #273244;
+    --header-bg: #1A365D;
+    --header-text: #FFFFFF;
+    
+    --green-dark: #1E4620;
+    --green-light: #4CAF50;
+    --red-alert: #D32F2F;
+    --gold: #FFC107;
+    
+    /* Player Colors */
+    --p-verde: #34C759;
+    --p-laranja: #FF9500;
+    --p-vermelho: #FF3B30;
+    --p-marrom: #A2845E;
+    --p-branco: #FFFFFF;
+    --p-roxo: #AF52DE;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Montserrat", sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    -webkit-font-smoothing: antialiased;
+    padding: 20px;
+    padding-bottom: 60px;
+  }
+
+  h1, h2, h3 { font-family: 'Outfit', sans-serif; }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  /* ================= PLACAR ================= */
+  .scoreboard-section {
+    background: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  .scoreboard-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .scoreboard-header i { font-size: 24px; color: var(--header-bg); }
+  .scoreboard-header h1 { font-size: 24px; color: var(--header-bg); font-weight: 800; }
+
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 900px;
+  }
+
+  th, td {
+    padding: 12px 8px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    background: var(--card-bg);
+  }
+  th:last-child, td:last-child { border-right: none; }
+  tr:last-child td { border-bottom: none; }
+
+  th {
+    background: var(--header-bg);
+    color: var(--header-text);
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  /* Sticky Columns */
+  .col-rank { width: 40px; position: sticky; left: 0; z-index: 20; background: var(--header-bg); color: var(--header-text); font-weight: bold; }
+  .col-name { width: 180px; position: sticky; left: 40px; z-index: 20; background: var(--header-bg); color: var(--header-text); }
+  .col-total { width: 80px; position: sticky; left: 220px; z-index: 20; background: #2A4A7F; color: #FFF; font-size: 16px; }
+
+  /* Body overrides for sticky */
+  tbody .col-rank { background: var(--card-bg); color: var(--text-muted); z-index: 5; }
+  tbody .col-name { background: var(--card-bg); z-index: 5; text-align: left; position: sticky; }
+  tbody .col-total { background: #FFF9E6; color: #B78A00; font-weight: 800; font-size: 18px; z-index: 5; }
+
+  /* Inputs */
+  input {
+    width: 100%;
+    border: 1px solid transparent;
+    background: transparent;
+    font-family: inherit;
+    font-size: 16px;
+    text-align: center;
+    padding: 8px 4px;
+    border-radius: 6px;
+    color: var(--text-main);
+    transition: all 0.2s;
+  }
+  input:focus {
+    outline: none;
+    border-color: var(--header-bg);
+    background: #F4F8FF;
+  }
+  
+  input.score-input { font-weight: 600; width: 50px; }
+  
+  /* Name Input & Color Picker */
+  .name-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    background: #1C1C1E; /* Dark background to show light colors */
+    padding: 4px 8px;
+    border-radius: 8px;
+  }
+  .name-wrapper input {
+    text-align: left;
+    font-weight: 700;
+    color: #FFFFFF; /* Default */
+    padding: 4px;
+  }
+  .name-wrapper input::placeholder { color: #8E8E93; font-weight: 400; }
+  
+  .color-btn {
+    background: none;
+    border: none;
+    color: #8E8E93;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    transition: 0.2s;
+  }
+  .color-btn:hover { color: #FFF; background: rgba(255,255,255,0.1); }
+
+  .color-popup {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    z-index: 100;
+    gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .color-popup.active { display: grid; }
+  
+  .color-swatch {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s;
+  }
+  .color-swatch:hover { transform: scale(1.2); }
+  .color-swatch.c-verde { background: var(--p-verde); }
+  .color-swatch.c-laranja { background: var(--p-laranja); }
+  .color-swatch.c-vermelho { background: var(--p-vermelho); }
+  .color-swatch.c-marrom { background: var(--p-marrom); }
+  .color-swatch.c-branco { background: var(--p-branco); border-color: #E5E5EA; }
+  .color-swatch.c-roxo { background: var(--p-roxo); }
+
+  /* ================= REGRAS ================= */
+  .rules-section {
+    background: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .rules-header {
+    background: var(--green-dark);
+    color: #FFF;
+    text-align: center;
+    padding: 24px 20px;
+    border-bottom: 6px solid var(--gold);
+    position: relative;
+  }
+  .rules-header i { font-size: 32px; margin-bottom: 10px; }
+  .rules-header h2 {
+    font-size: clamp(22px, 4vw, 32px);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .rules-header .badge {
+    background: var(--red-alert);
+    color: #FFF;
+    display: inline-block;
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 10px;
+    letter-spacing: 1px;
+  }
+
+  .rules-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rule-item {
+    display: flex;
+    padding: 24px 30px;
+    border-bottom: 1px solid var(--border-color);
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .rule-item:last-child { border-bottom: none; }
+
+  .rule-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 800;
+    color: #FFF;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .bg-green { background: var(--green-dark); }
+  .bg-orange { background: var(--p-laranja); }
+  .bg-red { background: var(--red-alert); }
+  .bg-blue { background: var(--header-bg); }
+  .bg-purple { background: var(--p-roxo); }
+
+  .rule-content h3 {
+    font-size: 18px;
+    color: var(--text-main);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .rule-content h3 .highlight { color: var(--red-alert); }
+  .rule-content ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .rule-content li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 600;
+    color: #3A3A3C;
+  }
+  .rule-content li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--text-muted);
+    font-size: 18px;
+  }
+  .rule-content strong.red { color: var(--red-alert); }
+  .rule-content strong.green { color: var(--green-light); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    body { padding: 10px; }
+    .col-name { width: 140px; left: 30px; }
+    .col-rank { width: 30px; }
+    .col-total { left: 170px; width: 60px; font-size: 14px; }
+    tbody .col-total { font-size: 16px; }
+    .rule-item { flex-direction: column; padding: 20px; gap: 12px; }
+  }
+
+body{
+ background:#0B0F14 !important;
+ padding:0 !important;
+ color:#F3F4F6 !important;
+}
+.container{
+ width:100% !important;
+ max-width:none !important;
+ padding:18px;
+}
+.scoreboard-section,.rules-section{
+ background:#111827 !important;
+ border:1px solid #273244;
+}
+td{ background:#111827 !important; color:#E5E7EB !important; }
+tbody .col-rank, tbody .col-name{ background:#0F172A !important; }
+tbody .col-total{ background:#2D2410 !important; color:#FFD54A !important; }
+
+input.score-input{
+ appearance:textfield;
+ -moz-appearance:textfield;
+ background:#0F172A !important;
+ color:white !important;
+ border:1px solid #334155 !important;
+ border-radius:10px;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{
+ -webkit-appearance:none;
+ margin:0;
+}
+
+.name-wrapper{
+ background:#0F172A !important;
+ border:1px solid #334155;
+}
+
+.color-popup{
+ display:none;
+ position:fixed !important;
+ top:50% !important;
+ left:50% !important;
+ transform:translate(-50%,-50%) !important;
+ background:#111827 !important;
+ border:1px solid #334155 !important;
+ border-radius:18px !important;
+ padding:16px !important;
+ grid-template-columns:repeat(3,1fr) !important;
+ gap:14px !important;
+ z-index:99999 !important;
+ box-shadow:0 30px 80px rgba(0,0,0,.7) !important;
+}
+
+.color-swatch{
+ width:42px !important;
+ height:42px !important;
+ border-radius:50% !important;
+ border:3px solid rgba(255,255,255,.2) !important;
+}
+
+.color-swatch:hover{
+ transform:scale(1.15);
+ border-color:#fff !important;
+}
+
+.rule-content li{
+ color:#D1D5DB !important;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- Scoreboard -->
+  <div class="scoreboard-section">
+    <div class="scoreboard-header">
+      <i class="fa-solid fa-list-ol"></i>
+      <h1>Placar Automático</h1>
+    </div>
+    
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-rank">#</th>
+            <th class="col-name">NOME</th>
+            <th class="col-total">TOTAL</th>
+            <th>12</th><th>11</th><th>10</th><th>9</th><th>8</th><th>7</th><th>6</th><th>5</th><th>4</th><th>3</th><th>2</th><th>1</th><th>0</th>
+          </tr>
+        </thead>
+        <tbody id="scoreboard-body">
+          <!-- Rows geradas via JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Regras -->
+  <div class="rules-section">
+    <div class="rules-header">
+      <i class="fa-solid fa-train"></i>
+      <h2>Dominó Mexicano</h2>
+      <div class="badge"><i class="fa-solid fa-star"></i> GUIA RÁPIDO <i class="fa-solid fa-star"></i></div>
+    </div>
+
+    <div class="rules-list">
+      
+      <div class="rule-item">
+        <div class="rule-icon bg-green">1</div>
+        <div class="rule-content">
+          <h3 style="color: var(--green-dark);">SUA VEZ: JOGUE UMA PEÇA</h3>
+          <ul>
+            <li>NA SUA CASA</li>
+            <li>EM QUALQUER OUTRA CASA ABERTA, PODENDO SER UMA CASA COMUNITÁRIA (SE HOUVER)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rule-item">
+        <div class="rule-icon bg-orange">2</div>
+        <div class="rule-content">
+          <h3>NÃO PODE JOGAR? <span class="highlight">COMPRE UMA PEÇA</span></h3>
+          <ul>
+            <li>COMPRE UMA PEÇA DA PILHA, SE A PEÇA PUDER SER JOGADA, JOGUE IMEDIATAMENTE</li>
+            <li>SE NÃO TIVEREM MAIS PEÇAS NA PILHA, SÓ PASSE A RODADA</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rule-item">
+        <div class="rule-icon bg-red">3</div>
+        <div class="rule-content">
+          <h3>NÃO CONSEGUE JOGAR NA <span class="highlight">SUA CASA?</span></h3>
+          <ul>
+            <li>CASO PASSE A RODADA OU NÃO CONSIGA JOGAR NA PRÓPRIA CASA, REMOVA O TREM, <strong class="red">ABRINDO SUA CASA.</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rule-item">
+        <div class="rule-icon bg-green" style="background: var(--green-light);">4</div>
+        <div class="rule-content">
+          <h3 style="color: var(--green-dark);">COMO FECHAR O TREM</h3>
+          <ul>
+            <li>AO JOGAR UMA PEÇA NA SUA PRÓPRIA CASA, VOLTE O TREM, <strong class="green">FECHANDO SUA CASA.</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rule-item">
+        <div class="rule-icon bg-purple"><i class="fa-solid fa-star"></i></div>
+        <div class="rule-content">
+          <h3 style="color: var(--p-roxo);">CARREIRÃO</h3>
+          <ul>
+            <li>AO JOGAR UM CARREIRÃO, DEVE POR OBRIGAÇÃO COMPLETAR A JOGADA COM MAIS UMA PEÇA DE MESMO NÚMERO.</li>
+            <li>SE NÃO CONSEGUIR COMPLETAR, <strong class="red">ABRA SUA CASA.</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rule-item">
+        <div class="rule-icon bg-blue"><i class="fa-solid fa-trophy"></i></div>
+        <div class="rule-content">
+          <h3 style="color: var(--header-bg);">QUEM GANHA?</h3>
+          <ul>
+            <li>SERÃO 13 RODADAS, COMEÇANDO COM O CARREIRÃO DE 12 NA ESTAÇÃO E TERMINANDO COM O CARREIRÃO DE ZERO.</li>
+            <li>AO FINAL DE CADA RODADA, SERÃO SOMADOS A QUANTIDADE DE PONTOS RESTANTES NAS MÃOS DE CADA JOGADOR.</li>
+            <li>O JOGADOR COM MENOS PONTOS AO FINAL DAS RODADAS GANHA.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tbody = document.getElementById('scoreboard-body');
+    const numPlayers = 8;
+    const numRounds = 13;
+    let rowsData = [];
+
+    // Colors mapping
+    const colorMap = {
+      'verde': 'var(--p-verde)',
+      'laranja': 'var(--p-laranja)',
+      'vermelho': 'var(--p-vermelho)',
+      'marrom': 'var(--p-marrom)',
+      'branco': 'var(--p-branco)',
+      'roxo': 'var(--p-roxo)'
+    };
+
+    // Initialize DOM rows
+    for (let i = 0; i < numPlayers; i++) {
+      const tr = document.createElement('tr');
+      
+      // Rank
+      const tdRank = document.createElement('td');
+      tdRank.className = 'col-rank';
+      tdRank.textContent = i + 1;
+      tr.appendChild(tdRank);
+
+      // Name & Color Picker
+      const tdName = document.createElement('td');
+      tdName.className = 'col-name';
+      
+      const nameWrap = document.createElement('div');
+      nameWrap.className = 'name-wrapper';
+      
+      const inpName = document.createElement('input');
+      inpName.type = 'text';
+      inpName.placeholder = `Jogador ${i + 1}`;
+      
+      const btnColor = document.createElement('button');
+      btnColor.className = 'color-btn';
+      btnColor.innerHTML = '<i class="fa-solid fa-palette"></i>';
+      
+      const colorPopup = document.createElement('div');
+      colorPopup.className = 'color-popup';
+      
+      // Add swatches
+      Object.entries(colorMap).forEach(([name, hex]) => {
+        const swatch = document.createElement('div');
+        swatch.className = `color-swatch c-${name}`;
+        swatch.dataset.color = hex;
+        swatch.addEventListener('click', (e) => {
+          e.stopPropagation();
+          inpName.style.color = hex;
+          colorPopup.classList.remove('active');
+        });
+        colorPopup.appendChild(swatch);
+      });
+
+      btnColor.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Close others
+        document.querySelectorAll('.color-popup').forEach(p => {
+          if(p !== colorPopup) p.classList.remove('active');
+        });
+        colorPopup.classList.toggle('active');
+      });
+
+      nameWrap.appendChild(inpName);
+      nameWrap.appendChild(btnColor);
+      nameWrap.appendChild(colorPopup);
+      tdName.appendChild(nameWrap);
+      tr.appendChild(tdName);
+
+      // Total
+      const tdTotal = document.createElement('td');
+      tdTotal.className = 'col-total';
+      tdTotal.textContent = '0';
+      tr.appendChild(tdTotal);
+
+      // Rounds
+      for (let j = 0; j < numRounds; j++) {
+        const tdScore = document.createElement('td');
+        const inpScore = document.createElement('input');
+        inpScore.type = 'number';
+        inpScore.min = '0';
+        inpScore.className = 'score-input';
+        inpScore.addEventListener('keydown',(e)=>{
+      if(e.key==='Enter'){ updateAndSort(); e.target.blur(); }
+    });
+    inpScore.addEventListener('blur', updateAndSort);
+        tdScore.appendChild(inpScore);
+        tr.appendChild(tdScore);
+      }
+
+      rowsData.push({ tr, total: 0 });
+      tbody.appendChild(tr);
+    }
+
+    // Close popups on outside click
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.color-popup').forEach(p => p.classList.remove('active'));
+    });
+
+    function updateAndSort() {
+      // Calculate totals
+      rowsData.forEach(row => {
+        let sum = 0;
+        let hasValue = false;
+        const inputs = row.tr.querySelectorAll('.score-input');
+        inputs.forEach(inp => {
+          const val = parseInt(inp.value);
+          if (!isNaN(val)) {
+            sum += val;
+            hasValue = true;
+          }
+        });
+        
+        // If row has no scores, push to bottom by giving it Infinity total
+        row.total = hasValue ? sum : Infinity;
+        row.tr.querySelector('.col-total').textContent = hasValue ? sum : '0';
+      });
+
+      // Sort array
+      rowsData.sort((a, b) => a.total - b.total);
+
+      // Re-append in correct order (does not destroy DOM, maintains focus)
+      rowsData.forEach((row, index) => {
+        row.tr.querySelector('.col-rank').textContent = index + 1;
+        tbody.appendChild(row.tr);
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
