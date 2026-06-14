@@ -12,15 +12,17 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Others Repository</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {{
             --bg-color: #0d1117;
-            --text-color: #c9d1d9;
-            --highlight-color: #3fb950;
-            --link-color: #58a6ff;
+            --text-color: #e6edf3;
+            --highlight-color: #7ee787;
+            --link-color: #4493f8;
             --border-color: #30363d;
             --hover-bg: #161b22;
-            --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            --secondary-text: #7d8590;
+            --font-mono: 'JetBrains Mono', 'Fira Code', 'Menlo', 'Monaco', 'Consolas', monospace;
         }}
 
         body {{
@@ -28,50 +30,58 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             color: var(--text-color);
             font-family: var(--font-mono);
             margin: 0;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 40px 20px;
+            line-height: 1.5;
             -webkit-font-smoothing: antialiased;
         }}
 
         .container {{
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
         }}
 
         .header {{
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 20px;
             margin-bottom: 30px;
         }}
 
-        .prompt {{
+        .prompt-line {{
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }}
+
+        .prompt-symbol {{
             color: var(--highlight-color);
             font-weight: bold;
         }}
 
-        .path {{
-            color: var(--link-color);
+        .command {{
+            color: var(--text-color);
         }}
 
-        .repo-title {{
-            font-size: 1.5rem;
-            margin-bottom: 10px;
+        .description {{
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            margin-left: 24px;
         }}
 
         .directory-list {{
             list-style: none;
             padding: 0;
+            margin: 20px 0;
             border: 1px solid var(--border-color);
-            border-radius: 6px;
+            border-radius: 8px;
+            background: #010409;
             overflow: hidden;
         }}
 
         .directory-item {{
             display: flex;
             align-items: center;
-            padding: 12px 16px;
+            padding: 12px 20px;
             border-bottom: 1px solid var(--border-color);
-            transition: background 0.15s ease;
+            transition: all 0.2s ease;
         }}
 
         .directory-item:last-child {{
@@ -83,81 +93,57 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         }}
 
         .directory-item a {{
-            color: var(--text-color);
+            color: var(--link-color);
             text-decoration: none;
             flex-grow: 1;
-            font-size: 1.1rem;
             display: flex;
             align-items: center;
-        }}
-
-        .directory-item a:hover {{
-            color: var(--link-color);
+            font-weight: 500;
         }}
 
         .icon {{
-            margin-right: 12px;
-            font-size: 1.2rem;
-            width: 24px;
+            margin-right: 15px;
+            font-size: 0.9rem;
+            width: 20px;
             text-align: center;
-            opacity: 0.8;
+            color: var(--secondary-text);
+        }}
+
+        .directory-item:hover .icon {{
+            color: var(--link-color);
         }}
 
         .stats {{
-            color: #6e7681;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            margin-left: 20px;
+            color: var(--secondary-text);
+            font-size: 0.85rem;
+            font-variant-numeric: tabular-nums;
         }}
 
         .footer {{
             margin-top: 40px;
-            color: #6e7681;
-            font-size: 0.9rem;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
             padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--secondary-text);
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
         }}
 
-        /* Mobile adjustments */
         @media (max-width: 600px) {{
-            body {{
-                padding: 15px;
-            }}
-            .repo-title {{
-                font-size: 1.2rem;
-            }}
-            .directory-item a {{
-                font-size: 1rem;
-            }}
-            .stats {{
-                display: none;
-            }}
-        }}
-
-        /* Scrollbar styling */
-        ::-webkit-scrollbar {{
-            width: 10px;
-        }}
-        ::-webkit-scrollbar-track {{
-            background: var(--bg-color);
-        }}
-        ::-webkit-scrollbar-thumb {{
-            background: var(--border-color);
-            border-radius: 5px;
-        }}
-        ::-webkit-scrollbar-thumb:hover {{
-            background: #484f58;
+            body {{ padding: 20px 15px; }}
+            .stats {{ display: none; }}
+            .description {{ margin-left: 0; }}
         }}
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div class="repo-title">
-                <span class="prompt">guest@luisaugusto:</span><span class="path">~/others</span>$ ls -l
+            <div class="prompt-line">
+                <span class="prompt-symbol">❯</span>
+                <span class="command">ls --projects</span>
             </div>
-            <div style="color: #8b949e;">Personal collection of small projects and experiments.</div>
+            <div class="description">Exploring personal workspace /others/</div>
         </div>
 
         <ul class="directory-list" id="project-list">
@@ -165,7 +151,8 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         </ul>
 
         <div class="footer">
-            total {count} project(s) listed. last update: {last_update}
+            <span><i class="fas fa-code-branch"></i> main</span>
+            <span>{count} projects found • Updated {last_update}</span>
         </div>
     </div>
 </body>
@@ -175,10 +162,10 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 ITEM_TEMPLATE = """
             <li class="directory-item">
                 <a href="{path}/index.html">
-                    <span class="icon">📁</span>
+                    <span class="icon"><i class="fas fa-folder"></i></span>
                     {path}/
                 </a>
-                <span class="stats">{mod_date}</span>
+                <span class="stats"><i class="far fa-calendar-alt"></i> {mod_date}</span>
             </li>"""
 
 def get_projects():
@@ -196,7 +183,6 @@ def get_projects():
                     "mod_time": mod_time
                 })
     
-    # Sort by modification time (newest first)
     projects.sort(key=lambda x: x["mod_time"], reverse=True)
     return projects
 
