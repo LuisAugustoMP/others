@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Briefing Metodológico — O Ambiente que Cura</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --g: #16a34a;
+      --g-mid: #22c55e;
+      --g-light: #dcfce7;
+      --g-tint: rgba(34, 197, 94, 0.07);
+      --g-border: rgba(34, 197, 94, 0.22);
+
+      --l: #7c3aed;
+      --l-mid: #a78bfa;
+      --l-light: #ede9fe;
+      --l-tint: rgba(139, 92, 246, 0.07);
+      --l-border: rgba(139, 92, 246, 0.22);
+
+      --amber: #d97706;
+      --amber-tint: rgba(217, 119, 6, 0.08);
+      --amber-border: rgba(217, 119, 6, 0.22);
+
+      --red: #dc2626;
+      --red-tint: rgba(220, 38, 38, 0.07);
+      --red-border: rgba(220, 38, 38, 0.2);
+
+      --bg: #f6f4ef;
+      --surface: rgba(255, 255, 255, 0.75);
+      --border: rgba(0, 0, 0, 0.07);
+      --ink: #1a1614;
+      --ink-2: #4a4340;
+      --ink-3: #8a8280;
+
+      --blur: blur(22px);
+      --sh-sm: 0 2px 12px rgba(0, 0, 0, 0.055), 0 0 0 1px rgba(255, 255, 255, 0.92) inset;
+      --sh-md: 0 6px 28px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.92) inset;
+      --sh-lg: 0 14px 44px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.92) inset;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ── ORBS ── */
+    .bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      animation: drift 24s ease-in-out infinite;
+    }
+
+    .orb-1 {
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(34, 197, 94, .12) 0%, transparent 65%);
+      top: -280px;
+      left: -220px;
+      filter: blur(55px);
+      animation-duration: 28s;
+    }
+
+    .orb-2 {
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(139, 92, 246, .11) 0%, transparent 65%);
+      top: 10%;
+      right: -240px;
+      filter: blur(55px);
+      animation-duration: 32s;
+      animation-delay: -12s;
+    }
+
+    .orb-3 {
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(34, 197, 94, .08) 0%, transparent 65%);
+      bottom: 5%;
+      left: 10%;
+      filter: blur(55px);
+      animation-duration: 26s;
+      animation-delay: -19s;
+    }
+
+    .orb-4 {
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(139, 92, 246, .09) 0%, transparent 65%);
+      bottom: 15%;
+      right: 5%;
+      filter: blur(55px);
+      animation-duration: 36s;
+      animation-delay: -7s;
+    }
+
+    @keyframes drift {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1)
+      }
+
+      33% {
+        transform: translate(28px, -18px) scale(1.03)
+      }
+
+      66% {
+        transform: translate(-18px, 28px) scale(.98)
+      }
+    }
+
+    /* ── GLASS ── */
+    .glass {
+      background: var(--surface);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border: 1px solid rgba(255, 255, 255, 0.88);
+      border-radius: 20px;
+      box-shadow: var(--sh-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 8%;
+      right: 8%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 1), transparent);
+      pointer-events: none;
+    }
+
+    .glass.g-t {
+      border-color: var(--g-border);
+      background: rgba(255, 255, 255, .62);
+      box-shadow: var(--sh-sm), 0 0 0 1px rgba(34, 197, 94, .06) inset;
+    }
+
+    .glass.l-t {
+      border-color: var(--l-border);
+      background: rgba(255, 255, 255, .62);
+      box-shadow: var(--sh-sm), 0 0 0 1px rgba(139, 92, 246, .06) inset;
+    }
+
+    .glass.a-t {
+      border-color: var(--amber-border);
+      background: rgba(255, 255, 255, .62);
+    }
+
+    /* ── LAYOUT ── */
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 3.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .35rem 1.1rem;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, .82);
+      border: 1px solid rgba(0, 0, 0, .08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .05);
+      font-size: .68rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 1.8rem;
+    }
+
+    .badge-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--amber);
+      box-shadow: 0 0 6px var(--amber);
+      animation: blink 2.2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .35
+      }
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 400;
+      line-height: 1.12;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      background: linear-gradient(120deg, var(--g), var(--l));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: .95rem;
+      color: var(--ink-2);
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    /* today pill */
+    .today-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .5rem 1.2rem;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, .85);
+      border: 1px solid rgba(0, 0, 0, .09);
+      box-shadow: var(--sh-sm);
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--ink-2);
+    }
+
+    .today-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--amber);
+      box-shadow: 0 0 8px var(--amber);
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    /* ── SECTION ── */
+    .sh {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.3rem;
+    }
+
+    .sh-num {
+      font-size: .62rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      white-space: nowrap;
+    }
+
+    .sh-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+
+    .sh-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.45rem, 2.8vw, 2rem);
+      font-weight: 400;
+      letter-spacing: -.015em;
+      margin-bottom: 1.6rem;
+    }
+
+    .sh-title em {
+      font-style: italic;
+      color: var(--ink-2);
+    }
+
+    .div {
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+      margin: 3.5rem 0;
+    }
+
+    /* ── MÉTODO OVERVIEW ── */
+    .method-banner {
+      padding: 2.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .mb-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .mb-label {
+      font-size: .62rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: .5rem;
+    }
+
+    .mb-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: .4rem;
+    }
+
+    .mb-ref {
+      font-size: .75rem;
+      color: var(--ink-3);
+      font-style: italic;
+    }
+
+    .mb-right {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .m-badge {
+      padding: .3rem .85rem;
+      border-radius: 100px;
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .m-badge.integr {
+      background: rgba(34, 197, 94, .1);
+      color: var(--g);
+      border: 1px solid var(--g-border);
+    }
+
+    .m-badge.prisma {
+      background: rgba(139, 92, 246, .1);
+      color: var(--l);
+      border: 1px solid var(--l-border);
+    }
+
+    .m-badge.prospero {
+      background: var(--amber-tint);
+      color: var(--amber);
+      border: 1px solid var(--amber-border);
+    }
+
+    .mb-body {
+      margin-top: 1.2rem;
+      font-size: .82rem;
+      color: var(--ink-2);
+      line-height: 1.75;
+      max-width: 780px;
+    }
+
+    /* ── ETAPAS ── */
+    .etapas-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: .9rem;
+      position: relative;
+    }
+
+    .etapas-wrap::before {
+      content: '';
+      position: absolute;
+      left: 2.2rem;
+      top: 2.5rem;
+      bottom: 2.5rem;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(34, 197, 94, .3), rgba(139, 92, 246, .3), rgba(139, 92, 246, .1), transparent);
+    }
+
+    .etapa-row {
+      display: grid;
+      grid-template-columns: 4.8rem 1fr;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .etapa-pin {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 1.3rem;
+    }
+
+    .etapa-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid;
+      background: var(--bg);
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .etapa-dot.today {
+      background: var(--amber);
+      border-color: var(--amber);
+      box-shadow: 0 0 0 4px rgba(217, 119, 6, .18), 0 0 16px rgba(217, 119, 6, .4);
+      animation: pulse-today 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-today {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 4px rgba(217, 119, 6, .18), 0 0 16px rgba(217, 119, 6, .4)
+      }
+
+      50% {
+        box-shadow: 0 0 0 8px rgba(217, 119, 6, .08), 0 0 24px rgba(217, 119, 6, .5)
+      }
+    }
+
+    .etapa-dot.g {
+      border-color: var(--g);
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, .12);
+    }
+
+    .etapa-dot.l {
+      border-color: var(--l);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, .12);
+    }
+
+    .etapa-dot.gl {
+      background: linear-gradient(white, white) padding-box, linear-gradient(135deg, var(--g), var(--l)) border-box;
+      border-color: transparent;
+      box-shadow: 0 0 0 3px rgba(100, 150, 200, .1);
+    }
+
+    .etapa-card {
+      padding: 1.4rem 1.6rem;
+      transition: transform .18s;
+    }
+
+    .etapa-card:hover {
+      transform: translateX(3px);
+    }
+
+    /* status line inside card */
+    .etapa-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: .4rem;
+      flex-wrap: wrap;
+    }
+
+    .etapa-meta {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .etapa-step {
+      font-size: .58rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      padding: .18rem .65rem;
+      border-radius: 100px;
+      font-size: .58rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .status-badge.now {
+      background: rgba(217, 119, 6, .1);
+      color: var(--amber);
+      border: 1px solid var(--amber-border);
+    }
+
+    .status-badge.next {
+      background: rgba(0, 0, 0, .05);
+      color: var(--ink-3);
+      border: 1px solid rgba(0, 0, 0, .09);
+    }
+
+    .status-badge.later {
+      background: rgba(0, 0, 0, .04);
+      color: #c0bab8;
+      border: 1px solid rgba(0, 0, 0, .06);
+    }
+
+    .etapa-date {
+      font-size: .7rem;
+      font-weight: 600;
+      padding: .22rem .75rem;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, .8);
+      border: 1px solid rgba(0, 0, 0, .08);
+      color: var(--ink-2);
+      white-space: nowrap;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .06);
+    }
+
+    .etapa-date.highlight {
+      background: var(--amber-tint);
+      border-color: var(--amber-border);
+      color: var(--amber);
+    }
+
+    .etapa-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      margin-bottom: .45rem;
+    }
+
+    .etapa-desc {
+      font-size: .78rem;
+      color: var(--ink-2);
+      line-height: 1.7;
+      margin-bottom: .8rem;
+    }
+
+    /* tasks inside etapa */
+    .etapa-tasks {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .etask {
+      display: flex;
+      align-items: flex-start;
+      gap: .75rem;
+      padding: .75rem 1rem;
+      background: rgba(255, 255, 255, .55);
+      border: 1px solid rgba(0, 0, 0, .065);
+      border-radius: 12px;
+      transition: background .2s;
+    }
+
+    .etask:hover {
+      background: rgba(255, 255, 255, .85);
+    }
+
+    .etask-who {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .65rem;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: .05rem;
+    }
+
+    .etask-who.g {
+      background: linear-gradient(135deg, #15803d, var(--g-mid));
+    }
+
+    .etask-who.l {
+      background: linear-gradient(135deg, #5b21b6, var(--l-mid));
+    }
+
+    .etask-who.gl {
+      background: linear-gradient(135deg, var(--g), var(--l));
+    }
+
+    .etask-content {
+      flex: 1;
+    }
+
+    .etask-title {
+      font-size: .8rem;
+      font-weight: 600;
+      margin-bottom: .15rem;
+    }
+
+    .etask-detail {
+      font-size: .73rem;
+      color: var(--ink-2);
+      line-height: 1.6;
+    }
+
+    .etask-tag {
+      font-size: .58rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: .15rem .55rem;
+      border-radius: 100px;
+      white-space: nowrap;
+      margin-top: .2rem;
+      display: inline-block;
+    }
+
+    .etask-tag.complete {
+      font-size: .58rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: .15rem .55rem;
+      border-radius: 100px;
+      white-space: nowrap;
+      margin-top: .2rem;
+      display: inline-block;
+    }
+
+    .etask-tag.g {
+      background: rgba(34, 197, 94, .1);
+      color: var(--g);
+      border: 1px solid var(--g-border);
+    }
+
+    .etask-tag.l {
+      background: rgba(139, 92, 246, .1);
+      color: var(--l);
+      border: 1px solid var(--l-border);
+    }
+
+    .etask-tag.both {
+      background: linear-gradient(90deg, rgba(34, 197, 94, .08), rgba(139, 92, 246, .08));
+      color: var(--ink-2);
+      border: 1px solid rgba(0, 0, 0, .09);
+    }
+
+    .etask-tag.complete {
+      background: rgba(52, 255, 126, 0.211);
+      color: var(--g);
+      border: 1px solid var(--g-border);
+    }
+
+    /* ── REUNIÕES ── */
+    .meetings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: .85rem;
+    }
+
+    .meet-card {
+      padding: 1.3rem 1.4rem;
+      transition: transform .2s, box-shadow .2s;
+      cursor: default;
+    }
+
+    .meet-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--sh-lg);
+    }
+
+    .meet-num {
+      font-size: .58rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: .3rem;
+    }
+
+    .meet-date {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      margin-bottom: .3rem;
+    }
+
+    .meet-focus {
+      font-size: .75rem;
+      font-weight: 600;
+      margin-bottom: .4rem;
+      color: var(--ink);
+    }
+
+    .meet-body {
+      font-size: .72rem;
+      color: var(--ink-2);
+      line-height: 1.65;
+    }
+
+    .meet-card.today-meet {
+      border-color: var(--amber-border);
+      background: rgba(255, 255, 255, .75);
+      box-shadow: var(--sh-md), 0 0 0 1px rgba(217, 119, 6, .08) inset;
+    }
+
+    .meet-card.today-meet .meet-date {
+      color: var(--amber);
+    }
+
+    .meet-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: .4rem;
+      vertical-align: middle;
+    }
+
+    .meet-dot.today-d {
+      background: var(--amber);
+      box-shadow: 0 0 6px var(--amber);
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    .meet-dot.future {
+      background: var(--g-mid);
+    }
+
+    /* ── WHITTEMORE FLOW ── */
+    .wk-flow {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0;
+      margin-bottom: .5rem;
+    }
+
+    .wk-step {
+      text-align: center;
+      padding: 1.2rem .8rem;
+      background: rgba(255, 255, 255, .6);
+      border: 1px solid rgba(0, 0, 0, .065);
+      position: relative;
+    }
+
+    .wk-step:first-child {
+      border-radius: 16px 0 0 16px;
+    }
+
+    .wk-step:last-child {
+      border-radius: 0 16px 16px 0;
+    }
+
+    .wk-step::after {
+      content: '→';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--ink-3);
+      font-size: .75rem;
+      z-index: 2;
+    }
+
+    .wk-step:last-child::after {
+      display: none;
+    }
+
+    .wk-n {
+      font-size: 1.2rem;
+      font-weight: 400;
+      font-family: 'Playfair Display', serif;
+      background: linear-gradient(120deg, var(--g), var(--l));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      margin-bottom: .3rem;
+    }
+
+    .wk-label {
+      font-size: .65rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: .2rem;
+    }
+
+    .wk-sub {
+      font-size: .6rem;
+      color: var(--ink-3);
+      line-height: 1.5;
+    }
+
+    /* ── CHIPS ── */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      margin-top: .6rem;
+    }
+
+    .chip {
+      padding: .18rem .65rem;
+      border-radius: 100px;
+      font-size: .6rem;
+      letter-spacing: .07em;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .chip.g {
+      background: rgba(34, 197, 94, .1);
+      color: var(--g);
+      border: 1px solid var(--g-border);
+    }
+
+    .chip.l {
+      background: rgba(139, 92, 246, .1);
+      color: var(--l);
+      border: 1px solid var(--l-border);
+    }
+
+    .chip.n {
+      background: rgba(0, 0, 0, .05);
+      color: var(--ink-3);
+      border: 1px solid rgba(0, 0, 0, .09);
+    }
+
+    .chip.a {
+      background: var(--amber-tint);
+      color: var(--amber);
+      border: 1px solid var(--amber-border);
+    }
+
+    /* ── FADE ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .fu {
+      opacity: 0;
+      animation: fadeUp .6s ease forwards;
+    }
+
+    .d1 {
+      animation-delay: .05s
+    }
+
+    .d2 {
+      animation-delay: .15s
+    }
+
+    .d3 {
+      animation-delay: .25s
+    }
+
+    .d4 {
+      animation-delay: .35s
+    }
+
+    .d5 {
+      animation-delay: .45s
+    }
+
+    .d6 {
+      animation-delay: .55s
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: .67rem;
+      letter-spacing: .1em;
+      color: var(--ink-3);
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:700px) {
+      .wk-flow {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .wk-step::after {
+        display: none;
+      }
+
+      .etapa-row {
+        grid-template-columns: 1fr;
+      }
+
+      .etapas-wrap::before {
+        display: none;
+      }
+
+      .etapa-pin {
+        display: none;
+      }
+
+      .meetings-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .mb-top {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="bg-canvas">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+
+  <!-- ══ HERO ══ -->
+  <div class="hero fu d1">
+    <div class="hero-badge"><span class="badge-dot"></span>Briefing Metodológico · Reunião de Kickoff</div>
+    <h1 class="hero-title">Estrutura &amp; <em>Cronograma</em></h1>
+    <p class="hero-sub">O que cada autor faz, quando entrega e o que será revisado em cada quinta-feira.</p>
+    <div id="meeting-pill" class="today-pill">
+      <span class="today-dot"></span>
+      <span id="pill-text">Carregando…</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ═══ 01 MODELO METODOLÓGICO ═══ -->
+    <div class="fu d2">
+      <div class="sh"><span class="sh-num">01</span>
+        <div class="sh-line"></div>
+      </div>
+      <h2 class="sh-title">Estrutura da <em>Revisão Integrativa</em></h2>
+
+      <div class="glass method-banner">
+        <div class="mb-top">
+          <div>
+            <p class="mb-label">Método Adotado</p>
+            <p class="mb-name">Revisão Integrativa da Literatura</p>
+            <p class="mb-ref">Whittemore & Knafl (2005) — 6 etapas estruturadas</p>
+          </div>
+          <div class="mb-right">
+            <span class="m-badge integr">Revisão Integrativa</span>
+            <span class="m-badge prisma">PRISMA 2020</span>
+            <span class="m-badge prospero">PROSPERO</span>
+          </div>
+        </div>
+        <p class="mb-body">A Revisão Integrativa foi escolhida porque é a única modalidade que permite reunir estudos
+          <strong>experimentais e não-experimentais</strong> no mesmo corpus — essencial aqui, já que os estudos de
+          arquitetura hospitalar raramente seguem o design de ensaios clínicos. O modelo de Whittemore & Knafl divide o
+          processo em seis etapas sequenciais, garantindo rastreabilidade e rigor suficientes para publicação Qualis A
+          quando combinado com protocolo PRISMA e registro no PROSPERO.
+        </p>
+      </div>
+
+      <!-- Whittemore flow -->
+      <div class="wk-flow">
+        <div class="wk-step"><span class="wk-n">1</span>
+          <p class="wk-label">Identificação</p>
+          <p class="wk-sub">Definir problema e pergunta</p>
+        </div>
+        <div class="wk-step"><span class="wk-n">2</span>
+          <p class="wk-label">Busca</p>
+          <p class="wk-sub">Executar estratégia nas bases</p>
+        </div>
+        <div class="wk-step"><span class="wk-n">3</span>
+          <p class="wk-label">Avaliação</p>
+          <p class="wk-sub">Triagem e qualidade</p>
+        </div>
+        <div class="wk-step"><span class="wk-n">4</span>
+          <p class="wk-label">Análise</p>
+          <p class="wk-sub">Extrair e cruzar dados</p>
+        </div>
+        <div class="wk-step"><span class="wk-n">5</span>
+          <p class="wk-label">Síntese</p>
+          <p class="wk-sub">Integrar achados</p>
+        </div>
+        <div class="wk-step"><span class="wk-n">6</span>
+          <p class="wk-label">Apresentação</p>
+          <p class="wk-sub">Redigir e submeter</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ═══ 02 ETAPAS COM PRAZOS ═══ -->
+    <div class="fu d3">
+      <div class="sh"><span class="sh-num">02</span>
+        <div class="sh-line"></div>
+      </div>
+      <h2 class="sh-title">Etapas, Tarefas &amp; <em>Prazos</em></h2>
+
+      <div class="etapas-wrap">
+
+        <!-- ── ETAPA 1 ── -->
+        <div class="etapa-row" data-start="2026-03-12" data-end="2026-03-19">
+          <div class="etapa-pin">
+            <div id="dot-1" class="etapa-dot today"></div>
+          </div>
+          <div class="glass etapa-card">
+            <div class="etapa-top">
+              <div class="etapa-meta">
+                <span class="etapa-step">Etapa 1 · Whittemore 1</span>
+                <span id="badge-1" class="status-badge now">● Agora</span>
+              </div>
+              <span id="datespan-1" class="etapa-date highlight">12–19 mar</span>
+            </div>
+            <p class="etapa-name">Identificação do Problema &amp; Configuração</p>
+            <p class="etapa-desc">Semana de fundação: definir e documentar a pergunta de pesquisa, criar infraestrutura
+              do projeto e registrar o protocolo. Nada deve ser buscado antes disso estar pronto — qualquer alteração
+              posterior ao registro compromete a integridade científica.</p>
+            <div class="etapa-tasks">
+              <div class="etask">
+                <div class="etask-who gl">GL</div>
+                <div class="etask-content">
+                  <p class="etask-title">Pergunta PICO — aprovada em 12/mar</p>
+                  <p class="etask-detail" style="margin-bottom:.6rem">
+                    <em style="font-style:normal;font-weight:600;color:var(--ink)">"Qual é a associação entre a
+                      incorporação de elementos de design biofílico em ambientes hospitalares e a redução de marcadores
+                      de estresse, do consumo de analgésicos e do tempo de internação em adultos hospitalizados, quando
+                      comparados a ambientes hospitalares convencionais, segundo evidências científicas publicadas nos
+                      últimos dez anos?"</em>
+                  </p>
+                  <div
+                    style="display:grid;grid-template-columns:repeat(2,1fr);gap:.4rem .8rem;font-size:.72rem;color:var(--ink-2);margin-bottom:.55rem">
+                    <div><strong style="color:var(--ink)">P</strong> — Adultos hospitalizados (cirúrgicos, clínicos,
+                      UTI)</div>
+                    <div><strong style="color:var(--ink)">I</strong> — Elementos de design biofílico no ambiente
+                      hospitalar</div>
+                    <div><strong style="color:var(--ink)">C</strong> — Ambientes hospitalares convencionais sem design
+                      biofílico</div>
+                    <div><strong style="color:var(--ink)">O</strong> — Estresse, analgésicos, tempo de internação, dor
+                      percebida</div>
+                  </div>
+                  <p class="etask-detail" style="font-size:.7rem;color:var(--ink-3)">⚑ Subgrupos a analisar: cirúrgicos
+                    · clínicos gerais · UTI — conforme sugestão da Gabriella.</p>
+                  <span class="etask-tag complete">Aprovada em reunião</span>
+                </div>
+              </div>
+              <div class="etask">
+                <div class="etask-who l">G</div>
+                <div class="etask-content">
+                  <p class="etask-title">Registrar protocolo no PROSPERO</p>
+                  <p class="etask-detail">Acessar prospero.york.ac.uk, criar conta e preencher o formulário de registro.
+                    O número PROSPERO gerado deve constar na metodologia do artigo. Isso é exigido por revistas A1 de
+                    saúde.</p>
+                  <span class="etask-tag l">Gabriella — até 19/mar</span>
+                </div>
+              </div>
+              <div class="etask">
+                <div class="etask-who gl">GL</div>
+                <div class="etask-content">
+                  <p class="etask-title">Criar ORCIDs e vincular à instituição</p>
+                  <p class="etask-detail">Ambos criam perfil em orcid.org (gratuito), vinculam à universidade e
+                    compartilham o número ORCID entre si. Anotar os dois ORCIDs no arquivo compartilhado do artigo.</p>
+                  <span class="etask-tag both">Ambos — até 16/mar</span>
+                </div>
+              </div>
+              <div class="etask">
+                <div class="etask-who gl">GL</div>
+                <div class="etask-content">
+                  <p class="etask-title">Criar pasta compartilhada e documento-base</p>
+                  <p class="etask-detail">Criar pasta no Google Drive com subpastas: /Referências, /Artigos-incluídos,
+                    /Rascunhos, /Entregas. Criar documento Google Docs com estrutura do artigo já comentada por seção.
+                  </p>
+                  <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-top:.55rem;">
+                    <span class="etask-tag complete">Finalizado — hoje</span>
+                    <a href="https://drive.google.com/drive/folders/1H9QmMUpbjKXRVvnltXI66ujpRoueMfXN?usp=share_link"
+                      target="_blank" rel="noopener" style="
+                       display:inline-flex;align-items:center;gap:.4rem;
+                       padding:.28rem .85rem;border-radius:100px;
+                       background:rgba(255,255,255,.82);
+                       border:1px solid rgba(0,0,0,.1);
+                       box-shadow:0 2px 8px rgba(0,0,0,.06);
+                       font-family:'Instrument Sans',sans-serif;
+                       font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+                       color:#1a73e8;text-decoration:none;
+                       transition:box-shadow .18s,transform .18s;
+                     "
+                      onmouseover="this.style.transform='translateY(-1px)';this.style.boxShadow='0 4px 14px rgba(0,0,0,.1)'"
+                      onmouseout="this.style.transform='';this.style.boxShadow='0 2px 8px rgba(0,0,0,.06)'">
+                      <svg width="13" height="13" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+                        <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z"
+                          fill="#0066da" />
+                        <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z"
+                          fill="#00ac47" />
+                        <path
+                          d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z"
+                          fill="#ea4335" />
+                        <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z"
+                          fill="#00832d" />
+                        <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z"
+                          fill="#2684fc" />
+                        <path
+                          d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z"
+                          fill="#ffba00" />
+                      </svg>
+                      Abrir no Drive
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── ETAPA 2 ── -->
+        <div class="etapa-row" data-start="2026-03-19" data-end="2026-03-26">
+          <div class="etapa-pin">
+            <div id="dot-2" class="etapa-dot gl"></div>
+          </div>
+          <div class="glass etapa-card">
+            <div class="etapa-top">
+              <div class="etapa-meta">
+                <span class="etapa-step">Etapa 2 · Whittemore 2</span>
+                <span id="badge-2" class="status-badge next">Próxima</span>
+              </div>
+              <span id="datespan-2" class="etapa-date">19–26 mar</span>
+            </div>
+            <p class="etapa-name">Busca na Literatura</p>
+            <p class="etapa-desc">Execução das buscas nas bases definidas, cada autor em suas bases de especialidade. Os
+              resultados são importados para o Rayyan (ferramenta gratuita de triagem) e duplicatas removidas antes da
+              próxima reunião.</p>
+            <div class="etapa-tasks">
+              <div class="etask">
+                <div class="etask-who l">G</div>
+                <div class="etask-content">
+                  <p class="etask-title">Busca em PubMed e SciELO</p>
+                  <p class="etask-detail">Executar string de busca com descritores MeSH: ("biophilic design" OR "healing
+                    environment" OR "nature-based design") AND ("hospital" OR "inpatient") AND ("stress" OR "cortisol"
+                    OR "recovery" OR "length of stay"). Registrar número de resultados por base.</p>
+                  <span class="etask-tag l">Gabriella — até 26/mar</span>
+                </div>
+              </div>
+              <div class="etask">
+                <div class="etask-who g">L</div>
+                <div class="etask-content">
+                  <p class="etask-title">Busca em Web of Science e Scopus</p>
+                  <p class="etask-detail">Executar busca com foco em arquitetura: ("biophilic" OR "therapeutic
+                    landscape" OR "healing architecture") AND ("hospital design" OR "healthcare facility"). Incluir
+                    revistas como HERD Journal e Building & Environment nos filtros de fonte.</p>
+                  <span class="etask-tag g">Luis — até 26/mar</span>
+                </div>
+              </div>
+              <div class="etask">
+                <div class="etask-who gl">GL</div>
+                <div class="etask-content">
+                  <p class="etask-title">Importar resultados para o Rayyan</p>
+                  <p class="etask-detail">Criar projeto em rayyan.ai, importar arquivos RIS ou CSV de cada base, remover
+                    duplicatas automaticamente. Compartilhar o projeto entre os dois autores para triagem independente.
+                  </p>
+                  <span class="etask-tag both">Ambos — até 26/mar</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── ETAPA 3 ── -->
+        <div class="etapa-row" data-start="2026-03-26" data-end="2026-04-09">
+          <div class="etapa-pin">
+            <div id="dot-3" class="etapa-dot l"></div>
+          </div>
+          <div class="glass etapa-card">
+            <div class="etapa-top">
+              <div class="etapa-meta">
+                <span class="etapa-step">Etapa 3 · Whittemore 3</span>
+                <span id="badge-3" class="status-badge later">Em breve</span>
+              </div>
+              <span id="datespan-3" class="etapa-date">26 mar–9 abr</span>
+            </div>
+            <p class="etapa-name">Avaliação e Triagem dos Estudos</p>
+            <p class="etapa-desc">Duas rodadas de triagem: primeiro por título e resumo (ambos independentemente no
+              Rayyan), depois leitura integral dos estudos pré-selecionados. Discordâncias são resolvidas por consenso
+              na reunião do dia 2/abr.</p>
+            <div class="etapa-tasks">
+              <div class="etask">
+                <div class="etask-who gl">GL</div>
+                <div class="etask-content">
+                  <p class="etask-title">Triagem 1 — Título e resumo (independente)</p>
+                  <p class="etask-detail">Cada autor avalia os artigos individualmente no Rayyan, marcando incluir /
+                    excluir / talvez. A triagem independente é exigida pelo PRISMA e evita viés de confirmação. Prazo:
+                    até 02/abr.</p>
+                  <span class="etask-tag both">Ambos — até 02/abr</span>
+                </div>
+              </div>
+              <div class="etask">
+                <div class="etask-who gl">GL</div>
+                <div class="etask-content">
+                  <p class="etask-title">Reunião de consenso — 02/abr (quinta)</p>
+                  <p class="etask-detail">Resolver discordâncias da triagem 1. Artigos com conflito são discutidos e
+                    decididos em conjunto. Gerar lista final para triagem 2 (leitura integral).</p>
+                  <span class="etask-tag both">Ambos — 02/abr</span>
+                </div>
+              </div>
+              <div class="etask">
+                <div class="etask-who gl">GL</div>
+                <div class="etask-content">
+                  <p class="etask-title">Triagem 2 — Leitura integral e qualidade</p>
+                  <p class="etask-detail">Ler os artigos pré-selecionados na íntegra. Gabriella aplica o CASP Checklist
+                    para qualidade metodológica. Luis avalia se o estudo de caso documenta suficientemente o elemento
+                    arquitetônico. Prazo: até 09/abr.</p>
+                  <span class="etask-tag both">Ambos — até 09/abr</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── ETAPA 4 ── -->
+        <div class="etapa-row" data-start="2026-04-09" data-end="2026-04-23">
+          <div class="etapa-pin">
+            <div id="dot-4" class="etapa-dot g"></div>
+          </div>
+          <div class="glass etapa-card">
+            <div class="etapa-top">
+              <div class="etapa-meta">
+                <span class="etapa-step">Etapa 4 · Whittemore 4</span>
+                <span id="badge-4" class="status-badge later">Em breve</span>
+              </div>
+              <span id="datespan-4" class="etapa-date">9–23 abr</span>
+            </div>
+            <p class="etapa-name">Extração e Análise dos Dados</p>
+            <p class="etapa-desc">Com o corpus final definido, cada autor extrai os dados da sua área em planilha
+              padronizada. As duas colunas — arquitetônica e clínica — são cruzadas nessa etapa para identificar os
+              padrões de associação que formarão a Discussão.</p>
+            <div class="etapa-tasks">
+              <div class="etask">
+                <div class="etask-who l">G</div>
+                <div class="etask-content">
+                  <p class="etask-title">Extrair indicadores clínicos</p>
+                  <p class="etask-detail">Para cada artigo incluído: registrar desfecho medido (cortisol, VAS,
+                    analgésicos, internação), n amostral, tipo de estudo, país, força de evidência (Oxford CEBM). Usar
+                    planilha compartilhada no Drive.</p>
+                  <span class="etask-tag l">Gabriella — até 16/abr</span>
+                </div>
+              </div>
+              <div class="etask">
+                <div class="etask-who g">L</div>
+                <div class="etask-content">
+                  <p class="etask-title">Extrair elementos arquitetônicos</p>
+                  <p class="etask-detail">Para cada artigo: registrar qual(is) dos 14 padrões biofílicos foram
+                    aplicados, como foi documentado o espaço (planta, foto, descrição), tipo de unidade hospitalar (UTI,
+                    enfermaria, ambulatório).</p>
+                  <span class="etask-tag g">Luis — até 16/abr</span>
+                </div>
+              </div>
+              <div class="etask">
+                <div class="etask-who gl">GL</div>
+                <div class="etask-content">
+                  <p class="etask-title">Cruzar as duas colunas — reunião 16/abr</p>
+                  <p class="etask-detail">Sessão de trabalho conjunto para identificar quais padrões biofílicos aparecem
+                    associados a quais desfechos clínicos. Esse cruzamento é o coração da Discussão. Gerar matriz padrão
+                    × desfecho.</p>
+                  <span class="etask-tag both">Ambos — 16/abr (quinta)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── ETAPA 5 ── -->
+        <div class="etapa-row" data-start="2026-04-23" data-end="2026-05-07">
+          <div class="etapa-pin">
+            <div id="dot-5" class="etapa-dot gl"></div>
+          </div>
+          <div class="glass etapa-card">
+            <div class="etapa-top">
+              <div class="etapa-meta">
+                <span class="etapa-step">Etapa 5 · Whittemore 5</span>
+                <span id="badge-5" class="status-badge later">Em breve</span>
+              </div>
+              <span id="datespan-5" class="etapa-date">23 abr–7 mai</span>
+            </div>
+            <p class="etapa-name">Síntese e Redação do Artigo</p>
+            <p class="etapa-desc">Fase de escrita intensiva. Cada autor redige sua parte conforme o guia, com revisões
+              semanais nas reuniões de quinta. O referencial teórico e a metodologia devem estar prontos antes de
+              começar a discussão.</p>
+            <div class="etapa-tasks">
+              <div class="etask">
+                <div class="etask-who l">G</div>
+                <div class="etask-content">
+                  <p class="etask-title">Redigir Metodologia + Referencial Médico</p>
+                  <p class="etask-detail">Seções 2 (Blocos C e D) e 3 completas. Incluir fluxograma PRISMA finalizado,
+                    número PROSPERO, tabela de qualidade dos estudos e texto fisiológico (HPA + parassimpático).</p>
+                  <span class="etask-tag l">Gabriella — até 30/abr</span>
+                </div>
+              </div>
+              <div class="etask">
+                <div class="etask-who g">L</div>
+                <div class="etask-content">
+                  <p class="etask-title">Redigir Introdução + Referencial Arquitetônico</p>
+                  <p class="etask-detail">Seções 1 e 2 (Blocos A e B). Texto histórico, 14 padrões, tabela comparativa e
+                    contextualização da biofilia. Harmonizar o início com o que Gabriella escreveu na perspectiva
+                    clínica.</p>
+                  <span class="etask-tag g">Luis — até 30/abr</span>
+                </div>
+              </div>
+              <div class="etask">
+                <div class="etask-who gl">GL</div>
+                <div class="etask-content">
+                  <p class="etask-title">Redigir Discussão — sessão conjunta obrigatória</p>
+                  <p class="etask-detail">Usar a matriz padrão × desfecho da etapa anterior. Cada parágrafo da discussão
+                    deve articular um elemento arquitetônico com pelo menos um desfecho clínico documentado. Reunião de
+                    trabalho conjunto em 07/mai.</p>
+                  <span class="etask-tag both">Ambos — até 07/mai</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── ETAPA 6 ── -->
+        <div class="etapa-row" data-start="2026-05-07" data-end="2026-05-21">
+          <div class="etapa-pin">
+            <div id="dot-6" class="etapa-dot gl"></div>
+          </div>
+          <div class="glass etapa-card">
+            <div class="etapa-top">
+              <div class="etapa-meta">
+                <span class="etapa-step">Etapa 6 · Whittemore 6</span>
+                <span id="badge-6" class="status-badge later">Em breve</span>
+              </div>
+              <span id="datespan-6" class="etapa-date">7–21 mai</span>
+            </div>
+            <p class="etapa-name">Revisão Final, Formatação e Submissão</p>
+            <p class="etapa-desc">Artigo completo revisado em conjunto, adequado às normas do periódico escolhido,
+              revisão de língua inglesa contratada e submissão. A revisão nativa em inglês leva de 5 a 10 dias úteis —
+              contratar com antecedência.</p>
+            <div class="etapa-tasks">
+              <div class="etask">
+                <div class="etask-who gl">GL</div>
+                <div class="etask-content">
+                  <p class="etask-title">Conclusão + Checklist de recomendações</p>
+                  <p class="etask-detail">Luis redige as recomendações; Gabriella valida cada item com base na evidência
+                    encontrada. Gerar o checklist biofílico final e sintetizar as limitações do estudo.</p>
+                  <span class="etask-tag both">Ambos — até 14/mai</span>
+                </div>
+              </div>
+              <div class="etask">
+                <div class="etask-who gl">GL</div>
+                <div class="etask-content">
+                  <p class="etask-title">Revisão nativa em inglês</p>
+                  <p class="etask-detail">Contratar serviço de language editing (Editage, AJE ou similar). Enviar o
+                    texto até 14/mai para receber revisado até 21/mai. Ambos revisam o texto retornado antes de
+                    submeter.</p>
+                  <span class="etask-tag both">Contratar com antecedência</span>
+                </div>
+              </div>
+              <div class="etask">
+                <div class="etask-who gl">GL</div>
+                <div class="etask-content">
+                  <p class="etask-title">Formatação e submissão ao periódico</p>
+                  <p class="etask-detail">Adequar à guia do autor do periódico escolhido (HERD, Building & Environment
+                    ou outro). Submeter pelo sistema online com ORCIDs, filiações, declaração de conflito de interesses
+                    e carta de apresentação.</p>
+                  <span class="etask-tag both">Ambos — 21/mai</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /etapas -->
+    </div>
+
+    <div class="div"></div>
+
+    <!-- ═══ 03 CALENDÁRIO DE REUNIÕES ═══ -->
+    <div class="fu d4">
+      <div class="sh"><span class="sh-num">03</span>
+        <div class="sh-line"></div>
+      </div>
+      <h2 class="sh-title">Calendário de <em>Reuniões</em></h2>
+
+      <div class="meetings-grid">
+
+        <div id="meet-1" data-date="2026-03-12" class="glass meet-card today-meet">
+          <p class="meet-num"><span id="mdot-1" class="meet-dot today-d"></span>Reunião 01</p>
+          <p id="mdate-1" class="meet-date">12 mar — Hoje</p>
+          <p class="meet-focus">Kickoff &amp; Alinhamento</p>
+          <p class="meet-body">Aprovar pergunta PICO, criar estrutura de pastas, criar ORCIDs, dividir tarefas da semana
+            1. Registrar decisões no Doc.</p>
+          <div class="chips" style="margin-top:.6rem"><span class="chip a">Hoje</span><span
+              class="chip n">Obrigatória</span></div>
+        </div>
+
+        <div id="meet-2" data-date="2026-03-19" class="glass meet-card">
+          <p class="meet-num"><span id="mdot-2" class="meet-dot future"></span>Reunião 02</p>
+          <p id="mdate-2" class="meet-date">19 mar</p>
+          <p class="meet-focus">Revisão do Protocolo</p>
+          <p class="meet-body">Conferir registro PROSPERO, validar string de busca de cada autor, alinhar critérios de
+            inclusão/exclusão antes de executar as buscas.</p>
+          <div class="chips" style="margin-top:.6rem"><span class="chip l">PROSPERO</span><span
+              class="chip g">Strings</span></div>
+        </div>
+
+        <div id="meet-3" data-date="2026-03-26" class="glass meet-card">
+          <p class="meet-num"><span id="mdot-3" class="meet-dot future"></span>Reunião 03</p>
+          <p id="mdate-3" class="meet-date">26 mar</p>
+          <p class="meet-focus">Resultado das Buscas</p>
+          <p class="meet-body">Apresentar volume de resultados por base, confirmar importação no Rayyan e remover
+            duplicatas. Definir cronograma interno da triagem 1.</p>
+          <div class="chips" style="margin-top:.6rem"><span class="chip n">Rayyan</span></div>
+        </div>
+
+        <div id="meet-4" data-date="2026-04-02" class="glass meet-card">
+          <p class="meet-num"><span id="mdot-4" class="meet-dot future"></span>Reunião 04</p>
+          <p id="mdate-4" class="meet-date">2 abr</p>
+          <p class="meet-focus">Consenso da Triagem 1</p>
+          <p class="meet-body">Resolver discordâncias da triagem por título/resumo. Gerar lista final para leitura
+            integral. Ambos devem ter concluído triagem individual antes desta reunião.</p>
+          <div class="chips" style="margin-top:.6rem"><span class="chip n">Consenso</span></div>
+        </div>
+
+        <div id="meet-5" data-date="2026-04-09" class="glass meet-card">
+          <p class="meet-num"><span id="mdot-5" class="meet-dot future"></span>Reunião 05</p>
+          <p id="mdate-5" class="meet-date">9 abr</p>
+          <p class="meet-focus">Corpus Final Definido</p>
+          <p class="meet-body">Triagem 2 concluída. Corpus final fechado com artigos incluídos. Discutir resultados da
+            avaliação CASP. Iniciar planilha de extração.</p>
+          <div class="chips" style="margin-top:.6rem"><span class="chip l">CASP</span></div>
+        </div>
+
+        <div id="meet-6" data-date="2026-04-16" class="glass meet-card">
+          <p class="meet-num"><span id="mdot-6" class="meet-dot future"></span>Reunião 06</p>
+          <p id="mdate-6" class="meet-date">16 abr</p>
+          <p class="meet-focus">Cruzamento dos Dados ★</p>
+          <p class="meet-body">Sessão mais importante: cruzar planilha arquitetônica (Luis) com planilha clínica
+            (Gabriella). Construir matriz padrão × desfecho ao vivo. Reservar 2h para esta reunião.</p>
+          <div class="chips" style="margin-top:.6rem"><span class="chip g">Luis</span><span
+              class="chip l">Gabriella</span><span class="chip a">2h</span></div>
+        </div>
+
+        <div id="meet-7" data-date="2026-04-23" class="glass meet-card">
+          <p class="meet-num"><span id="mdot-7" class="meet-dot future"></span>Reunião 07</p>
+          <p id="mdate-7" class="meet-date">23 abr</p>
+          <p class="meet-focus">Progresso da Redação</p>
+          <p class="meet-body">Revisão das seções já escritas. Referencial teórico e metodologia devem estar em
+            rascunho. Identificar bloqueios e redistribuir carga se necessário.</p>
+          <div class="chips" style="margin-top:.6rem"><span class="chip n">Check-in</span></div>
+        </div>
+
+        <div id="meet-8" data-date="2026-04-30" class="glass meet-card">
+          <p class="meet-num"><span id="mdot-8" class="meet-dot future"></span>Reunião 08</p>
+          <p id="mdate-8" class="meet-date">30 abr</p>
+          <p class="meet-focus">Revisão dos Referenciais</p>
+          <p class="meet-body">Seções 1, 2 e 3 entregues e revisadas. Cada autor lê e comenta a seção do outro antes da
+            reunião. Versão consolidada ao final do dia.</p>
+          <div class="chips" style="margin-top:.6rem"><span class="chip n">Peer review interno</span></div>
+        </div>
+
+        <div id="meet-9" data-date="2026-05-07" class="glass meet-card">
+          <p class="meet-num"><span id="mdot-9" class="meet-dot future"></span>Reunião 09</p>
+          <p id="mdate-9" class="meet-date">7 mai</p>
+          <p class="meet-focus">Discussão &amp; Conclusão ★</p>
+          <p class="meet-body">Sessão de escrita conjunta da Discussão. Usar a matriz como guia parágrafo a parágrafo.
+            Distribuir Conclusão e checklist final. Reservar 2h.</p>
+          <div class="chips" style="margin-top:.6rem"><span class="chip a">2h</span><span class="chip n">Escrita
+              conjunta</span></div>
+        </div>
+
+        <div id="meet-10" data-date="2026-05-14" class="glass meet-card">
+          <p class="meet-num"><span id="mdot-10" class="meet-dot future"></span>Reunião 10</p>
+          <p id="mdate-10" class="meet-date">14 mai</p>
+          <p class="meet-focus">Revisão Final</p>
+          <p class="meet-body">Artigo completo revisado em conjunto. Enviar para language editing em inglês. Confirmar
+            periódico de submissão e preparar carta de apresentação.</p>
+          <div class="chips" style="margin-top:.6rem"><span class="chip n">Language editing</span></div>
+        </div>
+
+        <div id="meet-11" data-date="2026-05-21" class="glass meet-card">
+          <p class="meet-num"><span id="mdot-11" class="meet-dot future"></span>Reunião 11</p>
+          <p id="mdate-11" class="meet-date">21 mai</p>
+          <p class="meet-focus">🚀 Submissão</p>
+          <p class="meet-body">Texto revisado em inglês recebido. Formatação final conforme guia do periódico. Submissão
+            ao sistema online. Comemoração merecida.</p>
+          <div class="chips" style="margin-top:.6rem"><span class="chip g">Meta final</span></div>
+        </div>
+
+      </div>
+
+      <!-- ── ICS DOWNLOAD BUTTON ── -->
+      <div style="display:flex; justify-content:center; margin-top:2rem;">
+        <button id="btn-ics" onclick="downloadICS()" style="
+        display:inline-flex; align-items:center; gap:.75rem;
+        padding:.85rem 2rem;
+        background:rgba(255,255,255,.78);
+        backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
+        border:1px solid rgba(255,255,255,.88);
+        border-radius:100px;
+        box-shadow:0 6px 28px rgba(0,0,0,.08), 0 0 0 1px rgba(255,255,255,.92) inset;
+        font-family:'Instrument Sans',sans-serif;
+        font-size:.82rem; font-weight:600; letter-spacing:.04em;
+        color:var(--ink); cursor:pointer;
+        transition:transform .18s ease, box-shadow .18s ease;
+      " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,.11), 0 0 0 1px rgba(255,255,255,.95) inset'"
+          onmouseout="this.style.transform='';this.style.boxShadow='0 6px 28px rgba(0,0,0,.08), 0 0 0 1px rgba(255,255,255,.92) inset'">
+          <span style="
+          width:32px; height:32px; border-radius:50%;
+          background:linear-gradient(135deg,var(--g),var(--l));
+          display:flex; align-items:center; justify-content:center;
+          font-size:1rem; flex-shrink:0;
+        ">📅</span>
+          <span>Adicionar ao Calendário&ensp;<span style="opacity:.45;font-weight:400">·</span>&ensp;<span
+              style="color:var(--ink-3);font-weight:400">11 reuniões .ics</span></span>
+        </button>
+      </div>
+
+    </div><!-- /fu d4 -->
+
+    <div class="div"></div>
+
+    <!-- ═══ 04 FORMALIZAÇÃO CIENTÍFICA ═══ -->
+    <div class="fu d5">
+      <div class="sh"><span class="sh-num">04</span>
+        <div class="sh-line"></div>
+      </div>
+      <h2 class="sh-title">Formalização <em>Científica: ORCID & PROSPERO</em></h2>
+
+      <div id="formalizacao-cards" style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <!-- ORCID CARD -->
+        <div class="glass etapa-card" style="background: rgba(255, 255, 255, 0.62); border-color: var(--l-border);">
+          <div class="etapa-top">
+            <div class="etapa-meta">
+              <span class="etapa-step">PARTE 1</span>
+              <span class="status-badge next"
+                style="background: rgba(139, 92, 246, .1); color: var(--l); border: 1px solid var(--l-border);">ORCID</span>
+            </div>
+          </div>
+          <h3 class="etapa-name">Identidade Digital: Criando e Vinculando o ORCID</h3>
+          <p class="etapa-desc">O ORCID é o seu "CPF internacional" na ciência. Ele evita confusões entre nomes
+            homônimos e reúne toda a sua produção em um só lugar.</p>
+
+          <div class="etapa-tasks">
+            <div class="etask">
+              <div class="etask-who l">G</div>
+              <div class="etask-content">
+                <div class="etask-title">Cadastro & Visibilidade</div>
+                <div class="etask-detail">Acesse <a href="https://orcid.org/register" target="_blank"
+                    style="color:var(--l); font-weight:600;">orcid.org/register</a>. Definam a visibilidade como
+                  <strong>"Everyone"
+                    (Público)</strong>.</div>
+              </div>
+            </div>
+            <div class="etask">
+              <div class="etask-who l">G</div>
+              <div class="etask-content">
+                <div class="etask-title">Vínculo Institucional & Educação</div>
+                <div class="etask-detail">
+                  <strong>Luís:</strong> Faculdade Luciano Feijão (Engenharia Civil).<br>
+                  <strong>Gabi:</strong> Universidade Estadual do Ceará (UECE) (Medicina).
+                </div>
+              </div>
+            </div>
+            <div class="etask">
+              <div class="etask-who l">G</div>
+              <div class="etask-content">
+                <div class="etask-title">Dica Extra</div>
+                <div class="etask-detail">Vinculem seus Lattes ao ORCID na seção "Websites and social links" para
+                  facilitar a integração nacional.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROSPERO CARD -->
+        <div class="glass etapa-card" style="background: rgba(255, 255, 255, 0.62); border-color: var(--amber-border);">
+          <div class="etapa-top">
+            <div class="etapa-meta">
+              <span class="etapa-step">PARTE 2</span>
+              <span class="status-badge now">PROSPERO</span>
+            </div>
+          </div>
+          <h3 class="etapa-name">Registro do Protocolo no PROSPERO</h3>
+          <p class="etapa-desc">Base de dados internacional de registros de protocolos. Registrar o tema evita que
+            outros pesquisadores "copiem" a ideia e aumenta as chances de publicação.</p>
+
+          <div class="etapa-tasks">
+            <div class="etask">
+              <div class="etask-who gl">GL</div>
+              <div class="etask-content">
+                <div class="etask-title">Criação de Conta & Verificação</div>
+                <div class="etask-detail">Acesse <a href="https://www.crd.york.ac.uk/prospero/" target="_blank"
+                    style="color:var(--amber); font-weight:600;">PROSPERO</a>. Pesquise por "Biophilic Design Hospital"
+                  antes de iniciar.</div>
+              </div>
+            </div>
+            <div class="etask">
+              <div class="etask-who gl">GL</div>
+              <div class="etask-content">
+                <div class="etask-title">Início do Registro</div>
+                <div class="etask-detail">Selecione "revisão sistemática de saúde humana". O registro deve ser feito
+                  <strong>ANTES</strong> da extração de dados definitiva.
+                </div>
+              </div>
+            </div>
+            <div class="etask">
+              <div class="etask-who gl">GL</div>
+              <div class="etask-content">
+                <div class="etask-title">Campos e Submissão</div>
+                <div class="etask-detail">Preencha os 22 campos obrigatórios (Título, Data Prevista, Domínio sendo
+                  estudado, Estratégia de busca).</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- IMPORTANT NOTE -->
+        <div
+          style="margin-top: 1rem; padding: 1.2rem; border-radius: 16px; background: var(--amber-tint); border: 1px solid var(--amber-border); color: var(--amber); font-size: 0.82rem; line-height: 1.6;">
+          <strong>⚠️ Importante:</strong> Esse número de registro deve constar na seção de "Metodologia" do artigo final
+          de vocês (ex: CRD4202X...).
+        </div>
+      </div>
+
+    </div><!-- /fu d5 -->
+
+  </div><!-- /wrap -->
+
+  <footer>
+    Briefing Metodológico · Luis Augusto Matos Pontes &amp; Gabriella Alves Coelho · 2026
+  </footer>
+
+  <script>
+    (function () {
+      // All Thursday meetings — add or remove dates here as needed
+      const meetings = [
+        { num: 1, date: new Date(2026, 2, 12), label: 'Kickoff & Alinhamento' },
+        { num: 2, date: new Date(2026, 2, 19), label: 'Revisão do Protocolo' },
+        { num: 3, date: new Date(2026, 2, 26), label: 'Resultado das Buscas' },
+        { num: 4, date: new Date(2026, 3, 2), label: 'Consenso da Triagem 1' },
+        { num: 5, date: new Date(2026, 3, 9), label: 'Corpus Final Definido' },
+        { num: 6, date: new Date(2026, 3, 16), label: 'Cruzamento dos Dados ★' },
+        { num: 7, date: new Date(2026, 3, 23), label: 'Progresso da Redação' },
+        { num: 8, date: new Date(2026, 3, 30), label: 'Revisão dos Referenciais' },
+        { num: 9, date: new Date(2026, 4, 7), label: 'Discussão & Conclusão ★' },
+        { num: 10, date: new Date(2026, 4, 14), label: 'Revisão Final' },
+        { num: 11, date: new Date(2026, 4, 21), label: '🚀 Submissão' },
+      ];
+
+      const ptMonths = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+
+      function fmt(d) {
+        return d.getDate() + ' de ' + ptMonths[d.getMonth()].charAt(0).toUpperCase()
+          + ptMonths[d.getMonth()].slice(1) + ' de ' + d.getFullYear();
+      }
+
+      // Midnight today — no time comparison needed
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      // Find meeting happening today
+      const todayMeeting = meetings.find(m => {
+        const md = new Date(m.date); md.setHours(0, 0, 0, 0);
+        return md.getTime() === today.getTime();
+      });
+
+      // Find next upcoming meeting
+      const nextMeeting = meetings.find(m => {
+        const md = new Date(m.date); md.setHours(0, 0, 0, 0);
+        return md.getTime() > today.getTime();
+      });
+
+      const pill = document.getElementById('meeting-pill');
+      const text = document.getElementById('pill-text');
+      const dot = pill.querySelector('.today-dot');
+
+      if (todayMeeting) {
+        // It's a meeting day — amber pulse
+        text.textContent = 'Reunião ' + todayMeeting.num + ' — Hoje, ' + fmt(todayMeeting.date)
+          + ' · ' + todayMeeting.label;
+        dot.style.background = 'var(--amber)';
+        dot.style.boxShadow = '0 0 8px var(--amber)';
+
+      } else if (nextMeeting) {
+        // Show days remaining
+        const md = new Date(nextMeeting.date); md.setHours(0, 0, 0, 0);
+        const diff = Math.round((md - today) / 86400000);
+        const when = diff === 1 ? 'amanhã' : 'em ' + diff + ' dias';
+        text.textContent = 'Próxima: Reunião ' + nextMeeting.num
+          + ' — ' + fmt(nextMeeting.date)
+          + ' (' + when + ') · ' + nextMeeting.label;
+        dot.style.background = 'var(--g-mid)';
+        dot.style.boxShadow = '0 0 8px var(--g-mid)';
+
+      } else {
+        // All meetings done
+        text.textContent = '✓ Todas as reuniões concluídas — artigo submetido!';
+        dot.style.background = 'var(--g-mid)';
+        dot.style.boxShadow = '0 0 8px var(--g-mid)';
+        dot.style.animation = 'none';
+        dot.style.opacity = '1';
+      }
+    })();
+
+    // ── DYNAMIC ETAPA DOT ──────────────────────────────────────────────
+    (function () {
+      const etapas = [
+        { n: 1, start: new Date(2026, 2, 12), end: new Date(2026, 2, 19), labelDate: '12–19 mar' },
+        { n: 2, start: new Date(2026, 2, 19), end: new Date(2026, 2, 26), labelDate: '19–26 mar' },
+        { n: 3, start: new Date(2026, 2, 26), end: new Date(2026, 3, 9), labelDate: '26 mar–9 abr' },
+        { n: 4, start: new Date(2026, 3, 9), end: new Date(2026, 3, 23), labelDate: '9–23 abr' },
+        { n: 5, start: new Date(2026, 3, 23), end: new Date(2026, 4, 7), labelDate: '23 abr–7 mai' },
+        { n: 6, start: new Date(2026, 4, 7), end: new Date(2026, 4, 21), labelDate: '7–21 mai' },
+      ];
+
+      const now = new Date(); now.setHours(0, 0, 0, 0);
+
+      // Find active etapa: today falls within [start, end)
+      let activeIdx = etapas.findIndex(e => {
+        const s = new Date(e.start); s.setHours(0, 0, 0, 0);
+        const en = new Date(e.end); en.setHours(0, 0, 0, 0);
+        return now >= s && now < en;
+      });
+
+      // If past all etapas, mark the last one as done
+      if (activeIdx === -1 && now >= new Date(2026, 4, 21)) activeIdx = 5;
+
+      etapas.forEach((e, i) => {
+        const dot = document.getElementById('dot-' + e.n);
+        const badge = document.getElementById('badge-' + e.n);
+        const datespan = document.getElementById('datespan-' + e.n);
+        if (!dot || !badge || !datespan) return;
+
+        // Reset dot — remove all state classes, keep only base class
+        dot.className = 'etapa-dot';
+
+        if (i === activeIdx) {
+          // ── ACTIVE: amber pulsing dot ──
+          dot.classList.add('today');
+          badge.className = 'status-badge now';
+          badge.textContent = '● Agora';
+          datespan.className = 'etapa-date highlight';
+
+        } else if (i === activeIdx + 1) {
+          // ── NEXT ──
+          dot.classList.add('gl');
+          badge.className = 'status-badge next';
+          badge.textContent = 'Próxima';
+          datespan.className = 'etapa-date';
+
+        } else if (i < activeIdx) {
+          // ── DONE ──
+          dot.classList.add('g');
+          dot.style.background = 'var(--g)';
+          dot.style.borderColor = 'var(--g)';
+          dot.style.boxShadow = 'none';
+          badge.className = 'status-badge';
+          badge.style.background = 'rgba(34,197,94,.08)';
+          badge.style.color = 'var(--g)';
+          badge.style.border = '1px solid var(--g-border)';
+          badge.textContent = '✓ Concluída';
+          datespan.className = 'etapa-date';
+
+        } else {
+          // ── FUTURE ──
+          dot.classList.add('l');
+          badge.className = 'status-badge later';
+          badge.textContent = 'Em breve';
+          datespan.className = 'etapa-date';
+        }
+      });
+    })();
+
+
+    // ── ICS DOWNLOAD ────────────────────────────────────────────────────
+    function downloadICS() {
+      const meetings = [
+        {
+          date: '20260312', summary: 'Reunião 01 — Kickoff & Alinhamento',
+          description: 'Aprovar pergunta PICO, criar estrutura de pastas, criar ORCIDs, dividir tarefas da semana 1.'
+        },
+        {
+          date: '20260319', summary: 'Reunião 02 — Revisão do Protocolo',
+          description: 'Conferir registro PROSPERO, validar strings de busca, alinhar critérios de inclusão/exclusão.'
+        },
+        {
+          date: '20260326', summary: 'Reunião 03 — Resultado das Buscas',
+          description: 'Apresentar volume de resultados por base, importar no Rayyan e remover duplicatas.'
+        },
+        {
+          date: '20260402', summary: 'Reunião 04 — Consenso da Triagem 1',
+          description: 'Resolver discordâncias da triagem por título/resumo. Gerar lista para leitura integral.'
+        },
+        {
+          date: '20260409', summary: 'Reunião 05 — Corpus Final Definido',
+          description: 'Triagem 2 concluída. Corpus final fechado. Discutir avaliação CASP. Iniciar planilha de extração.'
+        },
+        {
+          date: '20260416', summary: 'Reunião 06 ★ — Cruzamento dos Dados (2h)',
+          description: 'Cruzar planilha arquitetônica (Luis) com planilha clínica (Gabriella). Construir matriz padrão x desfecho. Reservar 2h.'
+        },
+        {
+          date: '20260423', summary: 'Reunião 07 — Progresso da Redação',
+          description: 'Revisão das seções já escritas. Referencial e metodologia em rascunho. Identificar bloqueios.'
+        },
+        {
+          date: '20260430', summary: 'Reunião 08 — Revisão dos Referenciais',
+          description: 'Seções 1, 2 e 3 entregues e revisadas. Cada autor comenta a seção do outro. Versão consolidada.'
+        },
+        {
+          date: '20260507', summary: 'Reunião 09 ★ — Discussão & Conclusão (2h)',
+          description: 'Escrita conjunta da Discussão. Usar a matriz como guia. Distribuir Conclusão e checklist. Reservar 2h.'
+        },
+        {
+          date: '20260514', summary: 'Reunião 10 — Revisão Final',
+          description: 'Artigo completo revisado. Enviar para language editing. Confirmar periódico e preparar carta de apresentação.'
+        },
+        {
+          date: '20260521', summary: 'Reunião 11 — Submissão do Artigo',
+          description: 'Formatação final conforme guia do periódico. Submissão ao sistema online com ORCIDs e filiações.'
+        },
+      ];
+
+      const uid = () => Math.random().toString(36).substr(2, 9).toUpperCase();
+      const stamp = new Date().toISOString().replace(/[-:.]/g, '').slice(0, 15) + 'Z';
+
+      const fold = str => {
+        let out = '', line = '';
+        for (const ch of str) {
+          if (line.length >= 74) { out += line + '\r\n'; line = ' '; }
+          line += ch;
+        }
+        return out + line;
+      };
+
+      let cal = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//O Ambiente que Cura//Reunioes//PT\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:Reunioes - O Ambiente que Cura\r\n';
+
+      meetings.forEach(m => {
+        const y = m.date.slice(0, 4), mo = m.date.slice(4, 6), d = m.date.slice(6, 8);
+        const next = new Date(+y, +mo - 1, +d + 1);
+        const endDate = next.getFullYear().toString()
+          + String(next.getMonth() + 1).padStart(2, '0')
+          + String(next.getDate()).padStart(2, '0');
+
+        cal += 'BEGIN:VEVENT\r\n'
+          + fold('UID:' + uid() + '-biofilia@oambientequeura') + '\r\n'
+          + 'DTSTAMP:' + stamp + '\r\n'
+          + 'DTSTART;VALUE=DATE:' + m.date + '\r\n'
+          + 'DTEND;VALUE=DATE:' + endDate + '\r\n'
+          + fold('SUMMARY:' + m.summary) + '\r\n'
+          + fold('DESCRIPTION:' + m.description) + '\r\n'
+          + 'STATUS:CONFIRMED\r\n'
+          + 'TRANSP:TRANSPARENT\r\n'
+          + 'END:VEVENT\r\n';
+      });
+
+      cal += 'END:VCALENDAR';
+
+      const blob = new Blob([cal], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'reunioes-o-ambiente-que-cura.ics';
+      document.body.appendChild(a); a.click();
+      document.body.removeChild(a); URL.revokeObjectURL(url);
+
+      const btn = document.getElementById('btn-ics');
+      const orig = btn.innerHTML;
+      btn.innerHTML = btn.innerHTML.replace('Adicionar ao Calendário', '✓ Arquivo baixado!');
+      btn.style.borderColor = 'rgba(34,197,94,.5)';
+      setTimeout(() => { btn.innerHTML = orig; btn.style.borderColor = ''; }, 3000);
+    }
+
+
+    // ── DYNAMIC MEETING CARDS ────────────────────────────────────────────
+    (function () {
+      const ptMonths = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+      const ptDays = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+
+      const meets = [
+        { n: 1, date: new Date(2026, 2, 12), base: '12 mar', focus: 'Kickoff & Alinhamento' },
+        { n: 2, date: new Date(2026, 2, 19), base: '19 mar', focus: 'Revisão do Protocolo' },
+        { n: 3, date: new Date(2026, 2, 26), base: '26 mar', focus: 'Resultado das Buscas' },
+        { n: 4, date: new Date(2026, 3, 2), base: '2 abr', focus: 'Consenso da Triagem 1' },
+        { n: 5, date: new Date(2026, 3, 9), base: '9 abr', focus: 'Corpus Final Definido' },
+        { n: 6, date: new Date(2026, 3, 16), base: '16 abr', focus: 'Cruzamento dos Dados ★' },
+        { n: 7, date: new Date(2026, 3, 23), base: '23 abr', focus: 'Progresso da Redação' },
+        { n: 8, date: new Date(2026, 3, 30), base: '30 abr', focus: 'Revisão dos Referenciais' },
+        { n: 9, date: new Date(2026, 4, 7), base: '7 mai', focus: 'Discussão & Conclusão ★' },
+        { n: 10, date: new Date(2026, 4, 14), base: '14 mai', focus: 'Revisão Final' },
+        { n: 11, date: new Date(2026, 4, 21), base: '21 mai', focus: 'Submissão' },
+      ];
+
+      const now = new Date(); now.setHours(0, 0, 0, 0);
+
+      // Which card is "active": today = same day; else next upcoming
+      let todayIdx = meets.findIndex(m => {
+        const d = new Date(m.date); d.setHours(0, 0, 0, 0);
+        return d.getTime() === now.getTime();
+      });
+      let nextIdx = meets.findIndex(m => {
+        const d = new Date(m.date); d.setHours(0, 0, 0, 0);
+        return d.getTime() > now.getTime();
+      });
+
+      meets.forEach((m, i) => {
+        const card = document.getElementById('meet-' + m.n);
+        const dot = document.getElementById('mdot-' + m.n);
+        const datel = document.getElementById('mdate-' + m.n);
+        if (!card || !dot || !datel) return;
+
+        const mDate = new Date(m.date); mDate.setHours(0, 0, 0, 0);
+        const diff = Math.round((mDate - now) / 86400000);
+
+        // ── TODAY ──
+        if (i === todayIdx) {
+          card.classList.add('today-meet');
+          dot.className = 'meet-dot today-d';
+          datel.textContent = m.base + ' — Hoje';
+          datel.style.color = 'var(--amber)';
+
+          // ── NEXT (only when no today match) ──
+        } else if (todayIdx === -1 && i === nextIdx) {
+          card.classList.add('today-meet');
+          // override amber date color with green for "next"
+          dot.className = 'meet-dot today-d';
+          dot.style.background = 'var(--g-mid)';
+          dot.style.boxShadow = '0 0 6px var(--g-mid)';
+          const label = diff === 1 ? 'amanhã' : 'em ' + diff + ' dias';
+          datel.textContent = m.base + ' — ' + label;
+          datel.style.color = 'var(--g-vivid, #16a34a)';
+          card.style.borderColor = 'var(--g-border)';
+          card.style.boxShadow = 'var(--sh-md), 0 0 0 1px rgba(34,197,94,.08) inset';
+
+          // ── PAST ──
+        } else if (mDate < now) {
+          card.classList.remove('today-meet');
+          dot.className = 'meet-dot';
+          dot.style.background = 'rgba(34,197,94,.25)';
+          dot.style.width = '6px';
+          dot.style.height = '6px';
+          dot.style.boxShadow = 'none';
+          datel.style.color = 'var(--ink-3, #8a8280)';
+          datel.textContent = m.base + ' — concluída';
+          card.style.opacity = '0.55';
+
+          // ── FUTURE ──
+        } else {
+          card.classList.remove('today-meet');
+          dot.className = 'meet-dot future';
+          dot.style.background = '';
+          dot.style.boxShadow = '';
+          datel.textContent = m.base;
+          datel.style.color = '';
+        }
+      });
+    })();
+
+  </script>
+
+</body>
+
+</html>

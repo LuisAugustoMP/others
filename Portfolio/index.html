@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-scheme="auto">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfólio — Luís Augusto M. Pontes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@300;400&display=swap"
+    rel="stylesheet" />
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.min.css'>
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────────── */
+    :root {
+      --radius-card: 22px;
+      --radius-pill: 100px;
+      --transition: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ── Light ── */
+    :root,
+    [data-scheme="light"] {
+      --bg-canvas: #f2f3f7;
+      --bg-mesh-a: rgba(66, 133, 244, 0.12);
+      /* Google Blue  */
+      --bg-mesh-b: rgba(52, 168, 83, 0.10);
+      /* Google Green */
+      --bg-mesh-c: rgba(251, 188, 4, 0.10);
+      /* Google Yellow*/
+      --glass-bg: rgba(255, 255, 255, 0.42);
+      --glass-bg-hover: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.75);
+      --glass-border-hover: rgba(255, 255, 255, 0.95);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.07), 0 2px 8px rgba(0, 0, 0, 0.04);
+      --glass-shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.06);
+      --text-primary: rgba(10, 10, 20, 0.90);
+      --text-secondary: rgba(10, 10, 20, 0.52);
+      --text-tertiary: rgba(10, 10, 20, 0.32);
+      --text-on-pill: rgba(10, 10, 20, 0.62);
+      --pill-bg: rgba(10, 10, 20, 0.06);
+      --pill-border: rgba(10, 10, 20, 0.08);
+      --accent: #4285F4;
+      --accent-glow: rgba(66, 133, 244, 0.16);
+      --header-blur-bg: rgba(242, 243, 247, 0.82);
+      --divider: rgba(10, 10, 20, 0.07);
+      --settings-bg: rgba(245, 246, 250, 0.88);
+      --settings-border: rgba(255, 255, 255, 0.92);
+      --settings-label: rgba(10, 10, 20, 0.42);
+      --seg-bg: rgba(10, 10, 20, 0.05);
+      --seg-active-bg: rgba(255, 255, 255, 0.95);
+      --seg-active-shadow: 0 2px 10px rgba(0, 0, 0, 0.10);
+      --seg-text: rgba(10, 10, 20, 0.42);
+      --seg-active-text: rgba(10, 10, 20, 0.88);
+      --slider-track: rgba(10, 10, 20, 0.10);
+      --icon-btn-bg: rgba(10, 10, 20, 0.05);
+      --icon-btn-hover: rgba(10, 10, 20, 0.09);
+      --social-btn-bg: rgba(10, 10, 20, 0.04);
+      --social-btn-border: rgba(10, 10, 20, 0.07);
+      --social-btn-hover: rgba(10, 10, 20, 0.08);
+    }
+
+    /* ── Dark ── */
+    [data-scheme="dark"] {
+      --bg-canvas: #07070f;
+      --bg-mesh-a: rgba(66, 133, 244, 0.14);
+      /* Google Blue  */
+      --bg-mesh-b: rgba(234, 67, 53, 0.10);
+      /* Google Red   */
+      --bg-mesh-c: rgba(52, 168, 83, 0.08);
+      /* Google Green */
+      --glass-bg: rgba(255, 255, 255, 0.042);
+      --glass-bg-hover: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.09);
+      --glass-border-hover: rgba(255, 255, 255, 0.18);
+      --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.55), 0 2px 10px rgba(0, 0, 0, 0.30);
+      --glass-shadow-hover: 0 20px 70px rgba(0, 0, 0, 0.70), 0 4px 18px rgba(0, 0, 0, 0.40);
+      --text-primary: rgba(255, 255, 255, 0.94);
+      --text-secondary: rgba(255, 255, 255, 0.48);
+      --text-tertiary: rgba(255, 255, 255, 0.25);
+      --text-on-pill: rgba(255, 255, 255, 0.52);
+      --pill-bg: rgba(255, 255, 255, 0.06);
+      --pill-border: rgba(255, 255, 255, 0.09);
+      --accent: #4285F4;
+      --accent-glow: rgba(66, 133, 244, 0.22);
+      --header-blur-bg: rgba(7, 7, 15, 0.85);
+      --divider: rgba(255, 255, 255, 0.06);
+      --settings-bg: rgba(12, 12, 22, 0.92);
+      --settings-border: rgba(255, 255, 255, 0.10);
+      --settings-label: rgba(255, 255, 255, 0.38);
+      --seg-bg: rgba(255, 255, 255, 0.06);
+      --seg-active-bg: rgba(255, 255, 255, 0.12);
+      --seg-active-shadow: 0 2px 10px rgba(0, 0, 0, 0.50);
+      --seg-text: rgba(255, 255, 255, 0.38);
+      --seg-active-text: rgba(255, 255, 255, 0.94);
+      --slider-track: rgba(255, 255, 255, 0.09);
+      --icon-btn-bg: rgba(255, 255, 255, 0.06);
+      --icon-btn-hover: rgba(255, 255, 255, 0.11);
+      --social-btn-bg: rgba(255, 255, 255, 0.05);
+      --social-btn-border: rgba(255, 255, 255, 0.08);
+      --social-btn-hover: rgba(255, 255, 255, 0.10);
+    }
+
+    /* ── Auto follows system ── */
+    @media (prefers-color-scheme: dark) {
+      [data-scheme="auto"] {
+        --bg-canvas: #07070f;
+        --bg-mesh-a: rgba(66, 133, 244, 0.14);
+        --bg-mesh-b: rgba(234, 67, 53, 0.10);
+        --bg-mesh-c: rgba(52, 168, 83, 0.08);
+        --glass-bg: rgba(255, 255, 255, 0.042);
+        --glass-bg-hover: rgba(255, 255, 255, 0.08);
+        --glass-border: rgba(255, 255, 255, 0.09);
+        --glass-border-hover: rgba(255, 255, 255, 0.18);
+        --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.55), 0 2px 10px rgba(0, 0, 0, 0.30);
+        --glass-shadow-hover: 0 20px 70px rgba(0, 0, 0, 0.70), 0 4px 18px rgba(0, 0, 0, 0.40);
+        --text-primary: rgba(255, 255, 255, 0.94);
+        --text-secondary: rgba(255, 255, 255, 0.48);
+        --text-tertiary: rgba(255, 255, 255, 0.25);
+        --text-on-pill: rgba(255, 255, 255, 0.52);
+        --pill-bg: rgba(255, 255, 255, 0.06);
+        --pill-border: rgba(255, 255, 255, 0.09);
+        --accent: #4285F4;
+        --accent-glow: rgba(66, 133, 244, 0.22);
+        --header-blur-bg: rgba(7, 7, 15, 0.85);
+        --divider: rgba(255, 255, 255, 0.06);
+        --settings-bg: rgba(12, 12, 22, 0.92);
+        --settings-border: rgba(255, 255, 255, 0.10);
+        --settings-label: rgba(255, 255, 255, 0.38);
+        --seg-bg: rgba(255, 255, 255, 0.06);
+        --seg-active-bg: rgba(255, 255, 255, 0.12);
+        --seg-active-shadow: 0 2px 10px rgba(0, 0, 0, 0.50);
+        --seg-text: rgba(255, 255, 255, 0.38);
+        --seg-active-text: rgba(255, 255, 255, 0.94);
+        --slider-track: rgba(255, 255, 255, 0.09);
+        --icon-btn-bg: rgba(255, 255, 255, 0.06);
+        --icon-btn-hover: rgba(255, 255, 255, 0.11);
+        --social-btn-bg: rgba(255, 255, 255, 0.05);
+        --social-btn-border: rgba(255, 255, 255, 0.08);
+        --social-btn-hover: rgba(255, 255, 255, 0.10);
+      }
+    }
+
+    /* ─── Reset ─────────────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 115%
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Google Sans', sans-serif;
+      background: var(--bg-canvas);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    /* ─── Canvas ─────────────────────────────────────────────── */
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none
+    }
+
+    /* ─── Mesh orbs ──────────────────────────────────────────── */
+    .mesh-orbs {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: drift var(--dd, 18s) ease-in-out infinite alternate
+    }
+
+    .orb-a {
+      width: 600px;
+      height: 600px;
+      background: var(--bg-mesh-a);
+      top: -120px;
+      left: -120px;
+      --dd: 20s
+    }
+
+    .orb-b {
+      width: 500px;
+      height: 500px;
+      background: var(--bg-mesh-b);
+      bottom: -100px;
+      right: -80px;
+      --dd: 17s;
+      animation-direction: alternate-reverse
+    }
+
+    .orb-c {
+      width: 400px;
+      height: 400px;
+      background: var(--bg-mesh-c);
+      top: 38%;
+      left: 52%;
+      --dd: 23s
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate(0, 0) scale(1)
+      }
+
+      to {
+        transform: translate(50px, 35px) scale(1.10)
+      }
+    }
+
+    /* ─── App wrapper ────────────────────────────────────────── */
+    .app-wrapper {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column
+    }
+
+    /* ─── Topbar ─────────────────────────────────────────────── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px 0 40px;
+      height: 52px;
+      background: var(--header-blur-bg);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .topbar-brand {
+      font-size: 16.8px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--text-primary)
+    }
+
+    .topbar-brand span {
+      color: var(--accent)
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .topbar-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 13.2px;
+      font-weight: 300;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em
+    }
+
+    /* Settings button */
+    .settings-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: var(--icon-btn-bg);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: background var(--transition-smooth), color var(--transition-smooth), transform var(--transition);
+    }
+
+    .settings-btn:hover {
+      background: var(--icon-btn-hover);
+      color: var(--text-primary)
+    }
+
+    .settings-btn.active {
+      background: var(--accent-glow);
+      color: var(--accent);
+      border-color: rgba(10, 132, 255, 0.25)
+    }
+
+    .settings-btn svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)
+    }
+
+    .settings-btn.active svg {
+      transform: rotate(60deg)
+    }
+
+    /* ─── Settings popup ─────────────────────────────────────── */
+    .settings-popup {
+      position: fixed;
+      top: 62px;
+      right: 20px;
+      width: 300px;
+      background: var(--settings-bg);
+      backdrop-filter: blur(32px) saturate(180%);
+      -webkit-backdrop-filter: blur(32px) saturate(180%);
+      border: 1px solid var(--settings-border);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22), 0 4px 16px rgba(0, 0, 0, 0.12);
+      z-index: 300;
+      transform-origin: top right;
+      transform: scale(0.88) translateY(-8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.22s ease;
+    }
+
+    .settings-popup.open {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+      pointer-events: all
+    }
+
+    .settings-popup::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 12%;
+      right: 12%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65) 40%, rgba(255, 255, 255, 0.90) 50%, rgba(255, 255, 255, 0.65) 60%, transparent);
+      border-radius: 18px 18px 0 0;
+      opacity: 0.7;
+    }
+
+    .popup-title {
+      font-size: 13.2px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--settings-label);
+      margin-bottom: 16px
+    }
+
+    .popup-row {
+      margin-bottom: 20px
+    }
+
+    .popup-row:last-child {
+      margin-bottom: 0
+    }
+
+    .popup-row-label {
+      font-size: 15.6px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .popup-row-label-value {
+      font-family: 'DM Mono', monospace;
+      font-size: 13.2px;
+      color: var(--accent);
+      opacity: 0.8
+    }
+
+    .popup-divider {
+      height: 1px;
+      background: var(--divider);
+      margin: 16px 0
+    }
+
+    /* Segmented control */
+    .seg-control {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      background: var(--seg-bg);
+      border-radius: 10px;
+      padding: 3px;
+      gap: 2px;
+      border: 1px solid var(--glass-border);
+    }
+
+    .seg-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 7px 4px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14.4px;
+      font-weight: 400;
+      color: var(--seg-text);
+      cursor: pointer;
+      transition: background var(--transition-smooth), color var(--transition-smooth), box-shadow var(--transition-smooth);
+    }
+
+    .seg-btn svg {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0
+    }
+
+    .seg-btn.active {
+      background: var(--seg-active-bg);
+      color: var(--seg-active-text);
+      box-shadow: var(--seg-active-shadow)
+    }
+
+    /* Sliders */
+    .density-slider-wrap {
+      position: relative;
+      padding: 4px 0
+    }
+
+    .density-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 100px;
+      background: var(--slider-track);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .density-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(66, 133, 244, 0.35);
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition-smooth);
+    }
+
+    .density-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.18);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.30), 0 0 0 3px rgba(66, 133, 244, 0.45);
+    }
+
+    .density-slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border: none;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+    }
+
+    .density-ticks {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px
+    }
+
+    .density-ticks span {
+      font-family: 'DM Mono', monospace;
+      font-size: 12.0px;
+      color: var(--text-tertiary);
+      line-height: 1
+    }
+
+    /* ─── Hero ───────────────────────────────────────────────── */
+    .hero {
+      padding: 90px 40px 50px;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%
+    }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 0
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      border-radius: var(--radius-pill);
+      font-size: 13.2px;
+      font-weight: 500;
+      color: var(--text-on-pill);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(0.65)
+      }
+    }
+
+    .hero-title {
+      font-size: clamp(48.0px, 6.6vw, 84.0px);
+      font-weight: 300;
+      letter-spacing: -0.04em;
+      line-height: 1.04;
+      color: var(--text-primary);
+      margin-bottom: 18px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s forwards;
+    }
+
+    .hero-title strong {
+      font-weight: 600
+    }
+
+    .hero-subtitle {
+      font-size: clamp(16.8px, 1.92vw, 20.4px);
+      font-weight: 300;
+      color: var(--text-secondary);
+      letter-spacing: -0.01em;
+      max-width: 420px;
+      line-height: 1.65;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.28s forwards;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    /* ─── Profile image ──────────────────────────────────────── */
+    .profile-wrap {
+      position: relative;
+      flex-shrink: 0;
+      width: 160px;
+      height: 160px;
+      opacity: 0;
+      animation: fadeUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s forwards;
+    }
+
+    #ring-canvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 130px;
+      height: 130px;
+      pointer-events: none;
+      z-index: 4;
+      border-radius: 50%
+    }
+
+    .profile-img-frame {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--glass-border);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.10);
+      z-index: 3;
+    }
+
+    .profile-img-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block
+    }
+
+    /* ─── Grid Section ───────────────────────────────────────── */
+    .section {
+      padding: 10px 40px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 20px
+    }
+
+    .section-title {
+      font-size: 14.4px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-tertiary)
+    }
+
+    .section-count {
+      font-family: 'DM Mono', monospace;
+      font-size: 13.2px;
+      color: var(--accent);
+      opacity: 0.75
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px
+    }
+
+    /* ─── Card ───────────────────────────────────────────────── */
+    .project-card {
+      position: relative;
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: var(--glass-bg);
+      backdrop-filter: blur(28px) saturate(160%);
+      -webkit-backdrop-filter: blur(28px) saturate(160%);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-card);
+      padding: 18px 20px;
+      box-shadow: var(--glass-shadow);
+      transition: background var(--transition-smooth), border-color var(--transition-smooth),
+        box-shadow var(--transition-smooth), transform var(--transition), opacity var(--transition-smooth);
+      overflow: hidden;
+      animation: cardIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    .project-card:nth-child(1) {
+      animation-delay: 0.12s
+    }
+
+    .project-card:nth-child(2) {
+      animation-delay: 0.22s
+    }
+
+    .project-card:nth-child(3) {
+      animation-delay: 0.32s
+    }
+
+    .project-card:nth-child(4) {
+      animation-delay: 0.42s
+    }
+
+    .project-card:nth-child(5) {
+      animation-delay: 0.52s
+    }
+
+    .project-card:nth-child(6) {
+      animation-delay: 0.62s
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.98)
+      }
+
+      to {
+        opacity: var(--card-final-opacity, 1);
+        transform: translateY(0) scale(1)
+      }
+    }
+
+    .project-card:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-hover);
+      box-shadow: var(--glass-shadow-hover);
+      transform: translateY(-4px) scale(1.012);
+    }
+
+    /* Dynamic light source highlight — follows mouse via --rx/--ry set by JS */
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-card);
+      background: radial-gradient(circle at var(--rx, 50%) var(--ry, 0%),
+          rgba(255, 255, 255, 0.28) 0%,
+          rgba(255, 255, 255, 0.10) 30%,
+          transparent 65%);
+      pointer-events: none;
+      transition: opacity var(--transition-smooth);
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .project-card:hover::before {
+      opacity: 1
+    }
+
+    /* Top edge specular */
+    .project-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: calc(var(--rx, 50%) - 30%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.80) 40%, rgba(255, 255, 255, 0.95) 50%, rgba(255, 255, 255, 0.80) 60%, transparent);
+      border-radius: 2px;
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 2;
+      transition: left var(--transition-smooth), opacity var(--transition-smooth);
+    }
+
+    .project-card:hover::after {
+      opacity: 1
+    }
+
+    .card-inner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      z-index: 3
+    }
+
+    .card-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(10, 132, 255, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22.8px;
+      flex-shrink: 0;
+      color: var(--accent);
+      transition: transform var(--transition), background var(--transition-smooth);
+    }
+
+    .project-card:hover .card-icon {
+      transform: scale(1.10) rotate(-5deg)
+    }
+
+    .card-body {
+      flex: 1;
+      min-width: 0
+    }
+
+    .card-folder {
+      font-family: 'DM Mono', monospace;
+      font-size: 12.0px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+      margin-bottom: 4px
+    }
+
+    .card-title {
+      font-size: 18.0px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      line-height: 1.2
+    }
+
+    .card-desc {
+      font-size: 14.4px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+    .card-arrow {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15.6px;
+      color: var(--text-secondary);
+      transition: transform var(--transition), background var(--transition-smooth), color var(--transition-smooth);
+    }
+
+    .project-card:hover .card-arrow {
+      transform: translate(3px, -3px);
+      background: var(--accent-glow);
+      color: var(--accent)
+    }
+
+    /* ─── Social Section ─────────────────────────────────────── */
+    .social-section {
+      padding: 0 40px 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%
+    }
+
+    .social-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 20px;
+      background: var(--social-btn-bg);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      border: 1px solid var(--social-btn-border);
+      border-radius: 14px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 15.6px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      box-shadow: var(--glass-shadow);
+      transition: background var(--transition-smooth), border-color var(--transition-smooth),
+        transform var(--transition), box-shadow var(--transition-smooth);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .social-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      background: radial-gradient(circle at var(--rx, 50%) var(--ry, 0%),
+          rgba(255, 255, 255, 0.22) 0%,
+          transparent 60%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-smooth);
+      z-index: 0;
+    }
+
+    .social-link:hover::before {
+      opacity: 1
+    }
+
+    .social-link::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15%;
+      right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.70) 50%, transparent);
+      opacity: 0.5;
+      border-radius: 2px;
+      z-index: 0;
+    }
+
+    .social-link:hover {
+      background: var(--social-btn-hover);
+      border-color: var(--glass-border-hover);
+      transform: translateY(-2px) scale(1.015);
+      box-shadow: var(--glass-shadow-hover);
+    }
+
+    .social-link-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1
+    }
+
+    .social-link-icon svg {
+      width: 18px;
+      height: 18px
+    }
+
+    .social-link-text {
+      position: relative;
+      z-index: 1
+    }
+
+    .social-link-name {
+      font-weight: 500;
+      display: block;
+      font-size: 15.6px
+    }
+
+    .social-link-handle {
+      font-family: 'Geist Mono', monospace;
+      font-size: 12.0px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.03em;
+      display: block;
+      margin-top: 1px
+    }
+
+    .social-link-instagram .social-link-icon {
+      background: transparent;
+      border: none;
+    }
+
+    .social-link-instagram .social-link-icon svg {
+      color: var(--text-secondary)
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────── */
+    .site-footer {
+      margin-top: auto;
+      padding: 24px 40px;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--divider);
+    }
+
+    .footer-text {
+      font-family: 'Geist Mono', monospace;
+      font-size: 13.2px;
+      font-weight: 300;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em
+    }
+
+    /* ─── Responsive ─────────────────────────────────────────── */
+    @media(max-width:760px) {
+      .topbar {
+        padding: 0 16px
+      }
+
+      .hero {
+        padding: 70px 20px 40px
+      }
+
+      .hero-inner {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 24px
+      }
+
+      .profile-wrap {
+        width: 120px;
+        height: 120px
+      }
+
+      .profile-img-frame {
+        width: 100px;
+        height: 100px
+      }
+
+      #ring-canvas {
+        inset: -28px
+      }
+
+      .section,
+      .social-section {
+        padding: 10px 20px 50px
+      }
+
+      .site-footer {
+        padding: 20px;
+        flex-direction: column;
+        gap: 6px;
+        align-items: flex-start
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr
+      }
+
+      .settings-popup {
+        right: 12px;
+        width: calc(100vw - 24px)
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="particle-canvas"></canvas>
+  <div class="mesh-orbs" aria-hidden="true">
+    <div class="orb orb-a"></div>
+    <div class="orb orb-b"></div>
+    <div class="orb orb-c"></div>
+  </div>
+
+  <div class="app-wrapper">
+
+    <!-- Topbar -->
+    <nav class="topbar">
+      <span class="topbar-brand">Luís Augusto <span>M. Pontes</span></span>
+      <div class="topbar-right">
+        <span class="topbar-date" id="js-date"></span>
+        <button class="settings-btn" id="settings-btn" aria-label="Configurações" title="Configurações">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3" />
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Settings popup -->
+    <div class="settings-popup" id="settings-popup" role="dialog" aria-label="Configurações">
+      <div class="popup-title">Configurações</div>
+
+      <div class="popup-row">
+        <div class="popup-row-label">Tema de cores</div>
+        <div class="seg-control" id="theme-seg" role="group" aria-label="Tema">
+          <button class="seg-btn" data-theme="light" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+            Claro
+          </button>
+          <button class="seg-btn" data-theme="dark" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+            Escuro
+          </button>
+          <button class="seg-btn active" data-theme="auto" aria-pressed="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+            Auto
+          </button>
+        </div>
+      </div>
+
+      <div class="popup-divider"></div>
+
+      <div class="popup-row">
+        <div class="popup-row-label">
+          Densidade de partículas
+          <span class="popup-row-label-value" id="density-val">10</span>
+        </div>
+        <div class="density-slider-wrap">
+          <input type="range" class="density-slider" id="density-slider" min="1" max="20" value="10" step="1"
+            aria-label="Densidade de partículas" />
+          <div class="density-ticks">
+            <span>1</span><span></span><span></span><span></span><span>5</span>
+            <span></span><span></span><span></span><span></span><span>10</span>
+            <span></span><span></span><span></span><span></span><span>15</span>
+            <span></span><span></span><span></span><span></span><span>20</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-divider"></div>
+
+      <div class="popup-row">
+        <div class="popup-row-label">
+          Atração do mouse
+          <span class="popup-row-label-value" id="attract-val">10</span>
+        </div>
+        <div class="density-slider-wrap">
+          <input type="range" class="density-slider" id="attract-slider" min="1" max="20" value="10" step="1"
+            aria-label="Atração do mouse" />
+          <div class="density-ticks">
+            <span>1</span><span></span><span></span><span></span><span>5</span>
+            <span></span><span></span><span></span><span></span><span>10</span>
+            <span></span><span></span><span></span><span></span><span>15</span>
+            <span></span><span></span><span></span><span></span><span>20</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="popup-divider"></div>
+
+      <div class="popup-row">
+        <div class="popup-row-label">
+          Velocidade das partículas
+          <span class="popup-row-label-value" id="speed-val">10</span>
+        </div>
+        <div class="density-slider-wrap">
+          <input type="range" class="density-slider" id="speed-slider" min="1" max="20" value="10" step="1"
+            aria-label="Velocidade das partículas" />
+          <div class="density-ticks">
+            <span>1</span><span></span><span></span><span></span><span>5</span>
+            <span></span><span></span><span></span><span></span><span>10</span>
+            <span></span><span></span><span></span><span></span><span>15</span>
+            <span></span><span></span><span></span><span></span><span>20</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="hero-eyebrow">Portfólio Pessoal</div>
+          <h1 class="hero-title">Projetos &amp;<br><strong>Experimentos</strong></h1>
+          <p class="hero-subtitle">Uma coleção de trabalhos exploratórios — interfaces, narrativas e ideias em HTML.</p>
+        </div>
+        <div class="profile-wrap" id="profile-wrap">
+          <canvas id="ring-canvas"></canvas>
+          <div class="profile-img-frame">
+            <img src="assets/profp.png" alt="Luís Augusto M. Pontes" />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Projects -->
+    <main class="section">
+      <div class="section-header">
+        <span class="section-title">Projetos</span>
+        <span class="section-count" id="js-count"></span>
+      </div>
+      <div class="projects-grid" id="js-grid"></div>
+    </main>
+
+    <!-- Social -->
+    <section class="social-section">
+      <div class="section-header">
+        <span class="section-title">Redes sociais</span>
+      </div>
+      <div class="social-grid">
+        <a href="https://instagram.com/luisaugusto.mp" target="_blank" rel="noopener"
+          class="social-link social-link-instagram" aria-label="Instagram">
+          <div class="social-link-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+          </div>
+          <div class="social-link-text">
+            <span class="social-link-name">Instagram</span>
+            <span class="social-link-handle">@luisaugusto.mp</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <span class="footer-text">luísaugustompontes.dev</span>
+      <span class="footer-text" id="js-count-footer"></span>
+    </footer>
+  </div>
+  <script>
+    /* ╔══════════════════════════════════════════════════════════════════╗
+       ║                 ★  CONFIGURAÇÕES GERAIS  ★                      ║
+       ║  Tudo que você precisa editar está nestas seções numeradas.     ║
+       ║  O restante do código não precisa ser tocado.                   ║
+       ╚══════════════════════════════════════════════════════════════════╝ */
+
+    /* ┌──────────────────────────────────────────────────────────────┐
+       │  ★  SEÇÃO 1 — PROJETOS                                       │
+       │  Para adicionar: copie um bloco { } e cole antes do          │
+       │  comentário "ADICIONE NOVOS PROJETOS AQUI".                  │
+       │                                                              │
+       │  • title  → nome exibido no card                             │
+       │  • folder → caminho relativo à raiz do repositório           │
+       │  • desc   → descrição curta (uma linha)                      │
+       │  • icon   → emoji do ícone do card                           │
+       └──────────────────────────────────────────────────────────────┘ */
+    const PROJECTS = [
+      {
+        title: "Currículo",
+        folder: "curriculo",
+        url: "https://luisaugustomp.github.io/curriculo/",
+        desc: "Currículo profissional em formato digital.",
+        icon: "<i class='fi fi-rr-graduation-cap'></i>",
+      },
+      {
+        title: "Biofilia Hospitalar",
+        folder: "BiofiliaHospitalar",
+        url: "https://luisaugustomp.github.io/BiofiliaHospitalar/",
+        desc: "Exploração do impacto de elementos naturais em ambientes hospitalares.",
+        icon: "<i class='fi fi-rr-leaf'></i>",
+      },
+      {
+        title: "Sobral Memória",
+        folder: "sobral-memoria",
+        url: "https://luisaugustomp.github.io/sobral-memoria/",
+        desc: "Arquivo visual e histórico da cidade de Sobral — memória em camadas.",
+        icon: "<i class='fi fi-rr-bank'></i>",
+      },
+      {
+        title: "Ibava Curso Biblico",
+        folder: "Ibava-Curso",
+        url: "https://luisaugustomp.github.io/Ibava-Curso/",
+        desc: "Projeto de Curso Bíblico para o IBAVA",
+        icon: "<i class='fi fi-rr-book-alt'></i>",
+      },
+      {
+        title: "MediaVault",
+        folder: "mediavault",
+        url: "https://luisaugustomp.github.io/mediavault/",
+        desc: "Aplicativo de gerenciamento de mídia e arquivos.",
+        icon: "<i class='fi fi-rr-cloud'></i>",
+      },
+      /* ▼▼▼  ADICIONE NOVOS PROJETOS AQUI  ▼▼▼
+      {
+        title:  "Novo Projeto",
+        folder: "NomeDoProjeto",
+        url:    "https://luisaugustomp.github.io/NomeDoProjeto/",
+        desc:   "Uma linha descrevendo o projeto.",
+        icon:   "✦",
+      },*/
+    ];
+
+    /* ┌──────────────────────────────────────────────────────────────┐
+       │  ★  SEÇÃO 2 — REDES SOCIAIS                                  │
+       │  Para adicionar: copie um bloco { } e cole antes do          │
+       │  comentário "ADICIONE NOVAS REDES AQUI".                     │
+       │                                                              │
+       │  • name    → nome da rede exibido no botão                   │
+       │  • handle  → @usuario ou texto de apoio                      │
+       │  • url     → link completo (https://...)                     │
+       │  • cssClass→ classe extra para estilização                   │
+       │  • icon    → SVG inline do ícone (string de template)        │
+       └──────────────────────────────────────────────────────────────┘ */
+    const SOCIALS = [
+      {
+        name: "Instagram",
+        handle: "@luisaugusto.mp",
+        url: "https://instagram.com/luisaugusto.mp",
+        cssClass: "social-link-instagram",
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+             </svg>`,
+      },
+      /* ▼▼▼  ADICIONE NOVAS REDES AQUI  ▼▼▼
+      {
+        name:     "LinkedIn",
+        handle:   "@luisaugusto",
+        url:      "https://linkedin.com/in/luisaugusto",
+        cssClass: "social-link-linkedin",
+        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`,
+      },
+      ▲▲▲  FIM DAS REDES SOCIAIS  ▲▲▲ */
+    ];
+
+    /* ┌──────────────────────────────────────────────────────────────┐
+       │  ★  SEÇÃO 3 — PAINEL DE CONFIGURAÇÕES (valores padrão)      │
+       │                                                              │
+       │  theme      → 'auto' | 'light' | 'dark'                     │
+       │  density    → quantidade de partículas   (1–20, padrão 5)    │
+       │  attraction → raio de atração do mouse   (1–20, padrão 5)    │
+       │  speed      → velocidade de atração      (1–20, padrão 5)    │
+       └──────────────────────────────────────────────────────────────┘ */
+    const DEFAULTS = {
+      theme: 'auto', // 'auto' segue o sistema operacional
+      density: 10,     // 1–20 → quantidade de partículas
+      attraction: 10,     // 1–20 → ATTRACT_RADIUS (80–1025 px)
+      speed: 10,     // 1–20 → ATTRACT_FORCE  (0.002–0.200)
+    };
+
+    /* ┌──────────────────────────────────────────────────────────────┐
+       │  ★  SEÇÃO 4 — PARTÍCULAS DE FUNDO                           │
+       │                                                              │
+       │  AREA_PER_PARTICLE → área (px²) por partícula no nível 1.   │
+       │  COUNT_CAP         → limite absoluto de partículas.          │
+       │  ATTRACT_RADIUS    → raio da zona de atração (slider).       │
+       │  ATTRACT_FORCE     → aceleração de atração/frame (slider).   │
+       │  ATTRACT_MIN_DIST  → zona de exclusão ao redor do cursor.    │
+       │  ORBIT_TANGENT     → força tangencial (efeito buraco negro). │
+       │  MUTUAL_RADIUS     → distância de repulsão entre partículas. │
+       │  MUTUAL_FORCE      → intensidade da repulsão entre pares.    │
+       │  DRIFT_X           → deriva horizontal constante (px/frame). │
+       │                      Negativo = esquerda. Mouse supera isso. │
+       │  SPEED_RANGE       → velocidade de deriva livre [min, max].  │
+       │  SIZE_FAR          → escala longe do mouse (1.0 = sem escala)│
+       │  SIZE_NEAR         → escala perto do mouse (menor = menor)   │
+       │  SIZE_RANGE        → raio base [min, max] px.                │
+       │  ALPHA_RANGE       → opacidade base [min, max] (0–1).        │
+       │  COLORS_DARK/LIGHT → paleta. prob deve somar 1.0.            │
+       └──────────────────────────────────────────────────────────────┘ */
+    const BG = {
+      AREA_PER_PARTICLE: 5000,
+      COUNT_CAP: 3000,
+
+      ATTRACT_RADIUS: 200,   // px — slider "Atração"
+      ATTRACT_FORCE: 0.008, // aceleração/frame — slider "Velocidade"
+      ATTRACT_MIN_DIST: 45,    // px — zona de exclusão ao redor do cursor
+      ORBIT_TANGENT: 0.030, // força tangencial (buraco negro)
+
+      MUTUAL_RADIUS: 40,    // px — repulsão entre pares
+      MUTUAL_FORCE: 0.38,
+
+      DRIFT_X: -0.018,     // deriva esquerda muito suave (px/frame)
+      // a atração do mouse (ATTRACT_FORCE ≈ 0.04) vence facilmente
+
+      SPEED_RANGE: [0.06, 0.22],
+      SIZE_FAR: 1.0,        // escala longe do mouse
+      SIZE_NEAR: 0.2,        // escala perto do mouse
+      SIZE_RANGE: [1.2, 3.6],
+      ALPHA_RANGE: [0.35, 0.85],
+
+      /* Google Blue 80% · Google Green 20% */
+      COLORS_DARK: [
+        { r: 90, g: 155, b: 255, prob: 0.80 },  // Blue — fundo escuro
+        { r: 70, g: 200, b: 110, prob: 0.20 },  // Green — fundo escuro
+      ],
+      COLORS_LIGHT: [
+        { r: 66, g: 133, b: 244, prob: 0.80 },  // #4285F4 Google Blue
+        { r: 52, g: 168, b: 83, prob: 0.20 },  // #34A853 Google Green
+      ],
+    };
+
+    /* ┌──────────────────────────────────────────────────────────────┐
+       │  ★  SEÇÃO 5 — ANEL DA FOTO DE PERFIL                        │
+       │                                                              │
+       │  COUNT        → número de partículas no anel.                │
+       │  RADIUS_MIN/MAX→ banda radial (px). Imagem = 130px → 65px.  │
+       │  ORBIT_SPEED  → velocidade orbital [min, max] rad/frame.    │
+       │  REPEL_RADIUS → raio de repulsão do mouse no anel.           │
+       │  REPEL_FORCE  → intensidade do repel no anel.                │
+       │  SIZE_RANGE   → raio visual [min, max] px.                   │
+       │  ALPHA_RANGE  → opacidade base [min, max].                   │
+       └──────────────────────────────────────────────────────────────┘ */
+    const RING = {
+      COUNT: 80,
+      RADIUS_MIN: 60,
+      RADIUS_MAX: 64,
+      ORBIT_SPEED: [0.12, 0.30],  // [min, max] rad/frame
+      REPEL_RADIUS: 55,
+      REPEL_FORCE: 18,
+      SIZE_RANGE: [1.5, 3.8],
+      ALPHA_RANGE: [0.25, 0.80],
+      /* Cores seguem BG.COLORS_DARK / BG.COLORS_LIGHT automaticamente */
+    };
+
+    /* ══════════════════════════════════════════════════════════════════
+       FIM DAS CONFIGURAÇÕES — o código abaixo não precisa ser editado.
+    ══════════════════════════════════════════════════════════════════ */
+
+    /* htmlEl / sysMQ — referências globais usadas em múltiplos módulos */
+    const htmlEl = document.documentElement;
+    const sysMQ = window.matchMedia('(prefers-color-scheme: dark)');
+
+    /* isDark() — retorna true se o tema ativo for escuro.
+       Verifica data-scheme; se for 'auto', usa a media-query do sistema. */
+    function isDark() {
+      const s = htmlEl.getAttribute('data-scheme');
+      if (s === 'dark') return true;
+      if (s === 'light') return false;
+      return sysMQ.matches;
+    }
+
+    /* state — estado compartilhado entre os módulos settings e partículas */
+    const state = { theme: DEFAULTS.theme, density: DEFAULTS.density };
+
+    /* ──────────────────────────────────────────────────────────────
+       MÓDULO: Grid de projetos
+       Lê PROJECTS, cria os cards dinamicamente e aplica o highlight
+       de luz (variáveis CSS --rx/--ry atualizadas pelo mousemove).
+    ────────────────────────────────────────────────────────────── */
+    (function buildGrid() {
+      const grid = document.getElementById('js-grid');
+      const n = PROJECTS.length;
+
+      /* Atualiza os contadores de projetos visíveis na página */
+      document.getElementById('js-count').textContent = `${n} ite${n !== 1 ? 'ns' : 'm'}`;
+      document.getElementById('js-count-footer').textContent = `${n} projeto${n !== 1 ? 's' : ''}`;
+
+      /* addLightEffect(el) — adiciona o efeito de luz dinâmica a qualquer elemento.
+         Atualiza --rx/--ry com a posição relativa do mouse para o CSS
+         posicionar o radial-gradient de highlight. */
+      function addLightEffect(el) {
+        el.addEventListener('mousemove', e => {
+          const r = el.getBoundingClientRect();
+          el.style.setProperty('--rx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+          el.style.setProperty('--ry', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+        });
+        el.addEventListener('mouseleave', () => {
+          el.style.removeProperty('--rx');
+          el.style.removeProperty('--ry');
+        });
+      }
+
+      /* Cria um <a> (card) para cada projeto e adiciona ao grid */
+      PROJECTS.forEach(p => {
+        const a = document.createElement('a');
+        a.className = 'project-card';
+        a.href = p.url;
+        a.setAttribute('aria-label', p.title);
+        a.innerHTML = `
+        <div class="card-inner">
+          <div class="card-icon">${p.icon}</div>
+          <div class="card-body">
+            <div class="card-folder">${p.folder}</div>
+            <div class="card-title">${p.title}</div>
+            <p class="card-desc">${p.desc}</p>
+          </div>
+          <div class="card-arrow">↗</div>
+        </div>`;
+        addLightEffect(a);
+        grid.appendChild(a);
+      });
+
+      /* Guarda addLightEffect no escopo global para uso no módulo de socials */
+      window._addLightEffect = addLightEffect;
+    })();
+
+    /* ──────────────────────────────────────────────────────────────
+       MÓDULO: Redes sociais
+       Lê SOCIALS, cria os botões dinamicamente e aplica luz dinâmica.
+    ────────────────────────────────────────────────────────────── */
+    (function buildSocials() {
+      const grid = document.querySelector('.social-grid');
+      if (!grid) return;
+
+      /* Limpa o HTML estático — os botões serão recriados pelo JS */
+      grid.innerHTML = '';
+
+      /* Cria um <a> para cada rede do array SOCIALS */
+      SOCIALS.forEach(s => {
+        const a = document.createElement('a');
+        a.href = s.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.className = `social-link ${s.cssClass}`;
+        a.setAttribute('aria-label', s.name);
+        a.innerHTML = `
+        <div class="social-link-icon">${s.icon}</div>
+        <div class="social-link-text">
+          <span class="social-link-name">${s.name}</span>
+          <span class="social-link-handle">${s.handle}</span>
+        </div>`;
+        window._addLightEffect && window._addLightEffect(a);
+        grid.appendChild(a);
+      });
+    })();
+
+    /* ──────────────────────────────────────────────────────────────
+       MÓDULO: Data no topbar
+       Atualiza o texto a cada 60 s — permanece correto se a página
+       ficar aberta durante a virada de meia-noite.
+    ────────────────────────────────────────────────────────────── */
+    function refreshDate() {
+      /* Formata a data atual no padrão "dd de mmm. de yyyy" em pt-BR */
+      document.getElementById('js-date').textContent =
+        new Date().toLocaleDateString('pt-BR', { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+    refreshDate();
+    setInterval(refreshDate, 60_000);
+
+    /* ──────────────────────────────────────────────────────────────
+       MÓDULO: Painel de configurações
+       Gerencia o segmented control de tema e os três sliders.
+       Cada função apply*() atualiza a variável BG correspondente
+       e redesenha o fill visual do slider.
+    ────────────────────────────────────────────────────────────── */
+    (function initSettings() {
+      const themeSeg = document.getElementById('theme-seg');
+      const segBtns = themeSeg.querySelectorAll('.seg-btn');
+      const settingsBtn = document.getElementById('settings-btn');
+      const settingsPopup = document.getElementById('settings-popup');
+      const densitySlider = document.getElementById('density-slider');
+      const densityVal = document.getElementById('density-val');
+      const attractSlider = document.getElementById('attract-slider');
+      const attractVal = document.getElementById('attract-val');
+      const speedSlider = document.getElementById('speed-slider');
+      const speedVal = document.getElementById('speed-val');
+
+      /* applyTheme(t) — aplica 'light', 'dark' ou 'auto'.
+         Define data-scheme no <html> e marca o botão ativo. */
+      function applyTheme(t) {
+        state.theme = t;
+        htmlEl.setAttribute('data-scheme', t);
+        segBtns.forEach(b => {
+          const active = b.dataset.theme === t;
+          b.classList.toggle('active', active);
+          b.setAttribute('aria-pressed', String(active));
+        });
+      }
+      themeSeg.addEventListener('click', e => {
+        const btn = e.target.closest('.seg-btn');
+        if (btn) applyTheme(btn.dataset.theme);
+      });
+      applyTheme(DEFAULTS.theme);
+
+      /* togglePopup() — abre/fecha o painel de configurações */
+      settingsBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        const open = settingsPopup.classList.toggle('open');
+        settingsBtn.classList.toggle('active', open);
+      });
+      /* Fecha ao clicar fora */
+      document.addEventListener('click', e => {
+        if (!settingsPopup.contains(e.target) && e.target !== settingsBtn) {
+          settingsPopup.classList.remove('open');
+          settingsBtn.classList.remove('active');
+        }
+      });
+      /* Fecha com Escape */
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          settingsPopup.classList.remove('open');
+          settingsBtn.classList.remove('active');
+        }
+      });
+
+      /* fillSlider(el, v, max) — pinta a track do slider de azul até v. */
+      function fillSlider(el, v, max) {
+        const pct = ((v - 1) / (max - 1)) * 100;
+        el.style.background =
+          `linear-gradient(to right, var(--accent) ${pct}%, var(--slider-track) ${pct}%)`;
+      }
+
+      /* applyDensity(v) — ajusta a quantidade de partículas (1–20). */
+      function applyDensity(v) {
+        fillSlider(densitySlider, v, 20);
+        densityVal.textContent = v;
+        state.density = v;
+        window._particleSetDensity && window._particleSetDensity(v);
+      }
+
+      /* applyAttraction(v) — ajusta o raio da zona de atração (1–20
+         mapeia para 80–1025 px em BG.ATTRACT_RADIUS). */
+      function applyAttraction(v) {
+        BG.ATTRACT_RADIUS = 80 + (v - 1) / 19 * (1025 - 80);
+        fillSlider(attractSlider, v, 20);
+        attractVal.textContent = v;
+      }
+
+      /* applySpeed(v) — ajusta a aceleração de atração do mouse (1–20
+         mapeia para 0.002–0.200 em BG.ATTRACT_FORCE). */
+      function applySpeed(v) {
+        BG.ATTRACT_FORCE = 0.002 + (v - 1) / 19 * (0.200 - 0.002);
+        fillSlider(speedSlider, v, 20);
+        speedVal.textContent = v;
+      }
+
+      /* Inicializa todos os sliders com os valores de DEFAULTS */
+      densitySlider.value = DEFAULTS.density;
+      densitySlider.addEventListener('input', () => applyDensity(parseInt(densitySlider.value)));
+      applyDensity(DEFAULTS.density);
+
+      attractSlider.value = DEFAULTS.attraction;
+      attractSlider.addEventListener('input', () => applyAttraction(parseInt(attractSlider.value)));
+      applyAttraction(DEFAULTS.attraction);
+
+      speedSlider.value = DEFAULTS.speed;
+      speedSlider.addEventListener('input', () => applySpeed(parseInt(speedSlider.value)));
+      applySpeed(DEFAULTS.speed);
+    })();
+
+    /* ──────────────────────────────────────────────────────────────
+       MÓDULO: Sistema de partículas de fundo
+       Pontos circulares derivam livremente com drift suave para a
+       esquerda (BG.DRIFT_X). O mouse atrai e faz orbitar (buraco negro).
+       Repulsão mútua mantém espaçamento natural entre os pontos.
+    ────────────────────────────────────────────────────────────── */
+    (function initParticles() {
+      const canvas = document.getElementById('particle-canvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, dpr;
+
+      /* mouse — posição global compartilhada com o módulo do anel */
+      const mouse = { x: -9999, y: -9999 };
+      window._globalMouse = mouse;
+
+      /* resize() — ajusta canvas ao tamanho da janela (respeitando DPR). */
+      function resize() {
+        dpr = window.devicePixelRatio || 1;
+        W = window.innerWidth;
+        H = window.innerHeight;
+        canvas.width = W * dpr;
+        canvas.height = H * dpr;
+        canvas.style.width = W + 'px';
+        canvas.style.height = H + 'px';
+        ctx.scale(dpr, dpr);
+      }
+
+      /* pickColor() — sorteia uma cor da paleta via roleta de probabilidades.
+         Retorna { r, g, b } baseado no tema ativo. */
+      function pickColor() {
+        const pal = isDark() ? BG.COLORS_DARK : BG.COLORS_LIGHT;
+        let acc = 0, rnd = Math.random();
+        for (const c of pal) { acc += c.prob; if (rnd < acc) return c; }
+        return pal[pal.length - 1];
+      }
+
+      /* Particle — representa um ponto individual do fundo. */
+      class Particle {
+        constructor() { this.init(); }
+
+        /* init() — sorteia posição, direção, tamanho, opacidade e cor. */
+        init() {
+          this.x = Math.random() * W;
+          this.y = Math.random() * H;
+          const spd = BG.SPEED_RANGE[0] + Math.random() * (BG.SPEED_RANGE[1] - BG.SPEED_RANGE[0]);
+          const ang = Math.random() * Math.PI * 2;
+          this.vx = Math.cos(ang) * spd;
+          this.vy = Math.sin(ang) * spd;
+          this.r = BG.SIZE_RANGE[0] + Math.random() * (BG.SIZE_RANGE[1] - BG.SIZE_RANGE[0]);
+          this.baseAlpha = BG.ALPHA_RANGE[0] + Math.random() * (BG.ALPHA_RANGE[1] - BG.ALPHA_RANGE[0]);
+          this.alpha = this.baseAlpha;
+          this.color = pickColor();
+        }
+
+        /* update(fx, fy) — integra física: drift + forças externas + fricção.
+           Mantém velocidade mínima e faz wrap nas bordas da tela. */
+        update(fx, fy) {
+          /* Aplica drift horizontal, forças externas (mouse + repulsão) e fricção */
+          this.vx = (this.vx + fx + BG.DRIFT_X) * 0.984;
+          this.vy = (this.vy + fy) * 0.984;
+
+          /* Garante velocidade mínima para o ponto nunca parar completamente */
+          const spd = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+          if (spd < BG.SPEED_RANGE[0] && spd > 0.0001) {
+            this.vx = (this.vx / spd) * BG.SPEED_RANGE[0];
+            this.vy = (this.vy / spd) * BG.SPEED_RANGE[0];
+          }
+
+          this.x += this.vx;
+          this.y += this.vy;
+
+          /* Wrap: reaparece no lado oposto ao sair da tela */
+          if (this.x < -20) this.x = W + 10;
+          if (this.x > W + 20) this.x = -10;
+          if (this.y < -20) this.y = H + 10;
+          if (this.y > H + 20) this.y = -10;
+        }
+
+        /* draw() — renderiza o ponto escalado pela distância ao mouse.
+           Longe → SIZE_FAR× · Perto → SIZE_NEAR× · Entre → interpolação. */
+        draw() {
+          const { r, g, b } = this.color;
+
+          const mdx = mouse.x - this.x;
+          const mdy = mouse.y - this.y;
+          const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+          let scale;
+
+          if (mouse.x < -999 || mdist >= BG.ATTRACT_RADIUS) {
+            scale = BG.SIZE_FAR;
+          } else if (mdist <= BG.ATTRACT_MIN_DIST) {
+            scale = BG.SIZE_NEAR;
+          } else {
+            const t = (mdist - BG.ATTRACT_MIN_DIST) / (BG.ATTRACT_RADIUS - BG.ATTRACT_MIN_DIST);
+            scale = BG.SIZE_NEAR + t * (BG.SIZE_FAR - BG.SIZE_NEAR);
+          }
+
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r * scale, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${r},${g},${b},${this.alpha})`;
+          ctx.fill();
+        }
+      }
+
+      /* baseCount() — partículas base para densidade 1.
+         Limitado a 200 para manter O(n²) da repulsão mútua abaixo de ~200². */
+      function baseCount() { return Math.min(Math.floor((W * H) / BG.AREA_PER_PARTICLE), 200); }
+
+      /* targetCount(d) — quantidade total para o nível de densidade d. */
+      function targetCount(density) { return Math.min(baseCount() * density, BG.COUNT_CAP); }
+
+      resize();
+      let particles = Array.from({ length: targetCount(DEFAULTS.density) }, () => new Particle());
+
+      /* _particleSetDensity(d) — API pública chamada pelo slider de densidade.
+         Adiciona novas partículas ou descarta as excedentes. */
+      window._particleSetDensity = function (d) {
+        const t = targetCount(d);
+        while (particles.length < t) particles.push(new Particle());
+        if (particles.length > t) particles.length = t;
+      };
+
+      /* loop() — render loop principal (requestAnimationFrame).
+         Etapas: repulsão mútua → interação mouse → update → draw. */
+      function loop() {
+        ctx.clearRect(0, 0, W, H);
+        const len = particles.length;
+        const fx = new Float32Array(len);  // força acumulada X de cada partícula
+        const fy = new Float32Array(len);  // força acumulada Y de cada partícula
+
+        /* ── Etapa 1: Repulsão mútua ──────────────────────────────────
+           Para cada par de partículas dentro de MUTUAL_RADIUS,
+           aplica força de afastamento proporcional à proximidade. */
+        const MR = BG.MUTUAL_RADIUS;
+        const MF = BG.MUTUAL_FORCE;
+        for (let i = 0; i < len; i++) {
+          for (let j = i + 1; j < len; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const d2 = dx * dx + dy * dy;
+            if (d2 < MR * MR && d2 > 0.01) {
+              const d = Math.sqrt(d2);
+              const mag = (1 - d / MR) * MF;
+              const nx = dx / d, ny = dy / d;
+              fx[i] += nx * mag; fy[i] += ny * mag;
+              fx[j] -= nx * mag; fy[j] -= ny * mag;
+            }
+          }
+        }
+
+        /* ── Etapa 2: Interação com o mouse (buraco negro) ────────────
+           Zona de atração (ATTRACT_RADIUS):
+             • Força radial (pull): puxa em direção ao cursor.
+             • Força tangencial (swirl): desvia 90°, cria efeito orbital.
+           Zona de exclusão (ATTRACT_MIN_DIST):
+             • Repele para fora — impedindo colapso no cursor. */
+        const AR = BG.ATTRACT_RADIUS;
+        const AF = BG.ATTRACT_FORCE;
+        const AMIN = BG.ATTRACT_MIN_DIST;
+        const OT = BG.ORBIT_TANGENT;
+
+        for (let i = 0; i < len; i++) {
+          const dx = mouse.x - particles[i].x;
+          const dy = mouse.y - particles[i].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < AR && dist > 0.5) {
+            const nx = dx / dist, ny = dy / dist;   // vetor radial (→ mouse)
+            const tx = -ny, ty = nx;          // vetor tangencial (90°)
+            if (dist < AMIN) {
+              /* Zona de exclusão: repele para fora proporcionalmente */
+              const push = (1 - dist / AMIN) * AF * 6;
+              fx[i] -= nx * push;
+              fy[i] -= ny * push;
+              particles[i].alpha = Math.min(1, particles[i].baseAlpha + 0.40);
+            } else {
+              /* Zona orbital: atração radial + desvio tangencial */
+              const t = 1 - (dist - AMIN) / (AR - AMIN); // 0→borda, 1→perto
+              fx[i] += nx * (t * AF) + tx * (t * OT);
+              fy[i] += ny * (t * AF) + ty * (t * OT);
+              particles[i].alpha += (particles[i].baseAlpha + t * 0.30 - particles[i].alpha) * 0.06;
+            }
+          } else {
+            /* Fora da zona: opacidade retorna suavemente ao valor base */
+            particles[i].alpha += (particles[i].baseAlpha - particles[i].alpha) * 0.04;
+          }
+        }
+
+        /* ── Etapa 3 & 4: Update física + render ───────────────────── */
+        for (let i = 0; i < len; i++) {
+          particles[i].update(fx[i], fy[i]);
+          particles[i].draw();
+        }
+
+        requestAnimationFrame(loop);
+      }
+      requestAnimationFrame(loop);
+
+      /* Eventos: atualizam posição do mouse / touch */
+      const onMove = (x, y) => { mouse.x = x; mouse.y = y; };
+      const onLeave = () => { mouse.x = -9999; mouse.y = -9999; };
+      window.addEventListener('mousemove', e => onMove(e.clientX, e.clientY));
+      window.addEventListener('mouseleave', onLeave);
+      window.addEventListener('touchmove', e => onMove(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
+      window.addEventListener('touchend', onLeave);
+
+      /* Ao redimensionar: recalcula canvas e ajusta contagem de partículas */
+      window.addEventListener('resize', () => {
+        resize();
+        const t = targetCount(state.density);
+        while (particles.length < t) particles.push(new Particle());
+        if (particles.length > t) particles.length = t;
+      });
+    })();
+
+    /* ──────────────────────────────────────────────────────────────
+       MÓDULO: Anel de partículas da foto de perfil
+       Pontos orbitam a imagem circular num anel fixo.
+       O mouse os repele angularmente; são projetados de volta ao
+       raio orbital para o anel manter o formato circular.
+    ────────────────────────────────────────────────────────────── */
+    (function initRing() {
+      const canvas = document.getElementById('ring-canvas');
+      const ctx = canvas.getContext('2d');
+      let CW, CH, cx, cy, dpr;
+
+      /* resize() — ajusta canvas do anel e recalcula ponto central. */
+      function resize() {
+        dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        CW = rect.width;
+        CH = rect.height;
+        canvas.width = CW * dpr;
+        canvas.height = CH * dpr;
+        cx = CW / 2;
+        cy = CH / 2;
+        ctx.scale(dpr, dpr);
+      }
+
+      /* pickColor() — mesma paleta BG, adaptada ao tema atual. */
+      function pickColor() {
+        const pal = isDark() ? BG.COLORS_DARK : BG.COLORS_LIGHT;
+        let acc = 0, rnd = Math.random();
+        for (const c of pal) { acc += c.prob; if (rnd < acc) return c; }
+        return pal[pal.length - 1];
+      }
+
+      /* RingParticle — ponto que orbita a imagem de perfil. */
+      class RingParticle {
+        constructor(i) {
+          /* Espaçamento angular uniforme ao redor do círculo */
+          this.angle = (i / RING.COUNT) * Math.PI * 2;
+          this.orbitR = RING.RADIUS_MIN + Math.random() * (RING.RADIUS_MAX - RING.RADIUS_MIN);
+          /* Metade no sentido horário (+), metade anti-horário (−) */
+          const spd = RING.ORBIT_SPEED[0] + Math.random() * (RING.ORBIT_SPEED[1] - RING.ORBIT_SPEED[0]);
+          this.orbitSpd = spd * (Math.random() < 0.5 ? 1 : -1);
+          this.r = RING.SIZE_RANGE[0] + Math.random() * (RING.SIZE_RANGE[1] - RING.SIZE_RANGE[0]);
+          this.baseAlpha = RING.ALPHA_RANGE[0] + Math.random() * (RING.ALPHA_RANGE[1] - RING.ALPHA_RANGE[0]);
+          this.alpha = this.baseAlpha;
+          this.color = pickColor();
+          this.x = cx + Math.cos(this.angle) * this.orbitR;
+          this.y = cy + Math.sin(this.angle) * this.orbitR;
+        }
+
+        /* update() — avança o ângulo e aplica repulsão do mouse.
+           Projeta de volta ao raio para preservar o anel. */
+        update() {
+          this.angle += this.orbitSpd * 0.016;
+
+          /* Posição ideal na órbita (sem perturbação) */
+          const ox = cx + Math.cos(this.angle) * this.orbitR;
+          const oy = cy + Math.sin(this.angle) * this.orbitR;
+
+          /* Converte mouse de coordenadas de página para coordenadas do canvas */
+          const m = window._globalMouse || { x: -9999, y: -9999 };
+          const cr = canvas.getBoundingClientRect();
+          const mx = m.x - cr.left;
+          const my = m.y - cr.top;
+          const dx = ox - mx, dy = oy - my;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          let tx = ox, ty = oy;
+          if (dist < RING.REPEL_RADIUS && dist > 0.5) {
+            /* Repulsão radial: afasta na direção oposta ao mouse */
+            const push = (1 - dist / RING.REPEL_RADIUS) * RING.REPEL_FORCE;
+            tx = ox + (dx / dist) * push;
+            ty = oy + (dy / dist) * push;
+            this.alpha = Math.min(1, this.baseAlpha + (1 - dist / RING.REPEL_RADIUS) * 0.35);
+          } else {
+            this.alpha += (this.baseAlpha - this.alpha) * 0.06;
+          }
+
+          /* Projeta de volta ao raio orbital para preservar o formato do anel */
+          const fc = tx - cx, fs = ty - cy;
+          const fd = Math.sqrt(fc * fc + fs * fs) || 1;
+          tx = cx + (fc / fd) * this.orbitR;
+          ty = cy + (fs / fd) * this.orbitR;
+
+          /* Suaviza a transição para evitar saltos */
+          this.x += (tx - this.x) * 0.15;
+          this.y += (ty - this.y) * 0.15;
+        }
+
+        /* draw() — renderiza o ponto do anel. */
+        draw() {
+          const { r, g, b } = this.color;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${r},${g},${b},${this.alpha})`;
+          ctx.fill();
+        }
+      }
+
+      /* Aguarda layout renderizado antes de medir o canvas */
+      requestAnimationFrame(() => {
+        resize();
+        const particles = Array.from({ length: RING.COUNT }, (_, i) => new RingParticle(i));
+
+        /* loop() — render loop do anel */
+        function loop() {
+          ctx.clearRect(0, 0, CW, CH);
+          particles.forEach(p => { p.update(); p.draw(); });
+          requestAnimationFrame(loop);
+        }
+        requestAnimationFrame(loop);
+
+        /* Ao redimensionar: recalcula centro e reposiciona partículas */
+        window.addEventListener('resize', () => {
+          resize();
+          particles.forEach(p => {
+            p.x = cx + Math.cos(p.angle) * p.orbitR;
+            p.y = cy + Math.sin(p.angle) * p.orbitR;
+          });
+        });
+      });
+    })();
+  </script>
+
+</body>
+
+</html>
